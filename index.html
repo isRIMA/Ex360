@@ -2,202 +2,292 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>الدورة المرتقبة - EX360</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- خط تجول العربي الفخم -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دورة صناعة المحتوى التوعوي للجهات الحكومية</title>
+    <!-- خط القاهرة من قوقل -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- أيقونات Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+    <!-- تضمين Tailwind CSS عبر الـ CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Tajawal', 'sans-serif'] },
                     colors: {
-                        brand: {
-                            dark: '#05070c',
-                            card: '#0f131e',
-                            purple: '#8b5cf6',
-                            pink: '#ec4899',
-                            amber: '#f59e0b'
-                        }
+                        primary: '#0B1B3D',
+                        secondary: '#C5A880',
+                        neutralBg: '#F8F9FA'
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif']
                     }
                 }
             }
         }
     </script>
     
+    <!-- مكتبة الأيقونات Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         body {
-            background-color: #05070c;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
         }
-        /* كرات إضاءة ناعمة وخفيفة تناسب الجوال ولا تبطئ التصفح */
-        .mobile-glow {
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            filter: blur(60px);
-            opacity: 0.12;
-            pointer-events: none;
-            z-index: 0;
+        /* تأثيرات ظهور متحركة ناعمة عند التمرير */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        /* إخفاء شريط التمرير الأفقي مع الحفاظ على ميزة السحب بالكروت */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="text-white font-sans antialiased pb-safe-bottom">
+<body class="bg-neutralBg text-primary antialiased selection:bg-secondary selection:text-white">
 
-    <!-- إضاءة خلفية ناعمة -->
-    <div class="mobile-glow top-10 left-0 bg-brand-purple"></div>
-    <div class="mobile-glow top-1/3 right-0 bg-brand-pink"></div>
-
-    <!-- 1. الهيدر (رأس الصفحة متناسق ومضغوط) -->
-    <header class="relative z-10 border-b border-white/5 backdrop-blur-md sticky top-0 bg-[#05070c]/80">
-        <div class="px-5 py-3.5 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-purple via-brand-pink to-brand-amber flex items-center justify-center shadow-lg">
-                    <i class="fa-solid fa-graduation-cap text-sm text-white"></i>
-                </div>
-                <span class="text-lg font-black tracking-wide bg-gradient-to-l from-white to-gray-400 bg-clip-text text-transparent">EX360</span>
-            </div>
-            
-            <div class="flex items-center gap-2 bg-brand-purple/10 border border-brand-purple/20 px-3 py-1 rounded-full">
-                <span class="w-2 h-2 rounded-full bg-brand-pink animate-pulse"></span>
-                <span class="text-[10px] font-bold text-purple-200 tracking-wide">التحضيرات حية</span>
-            </div>
-        </div>
-    </header>
-
-    <!-- 2. قسم الـ Hero (العنوان والترحيب) -->
-    <main class="relative z-10 px-5 pt-8 text-center">
-        <!-- شارة ترحيبية صغيرة -->
-        <div class="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-[11px] font-medium text-gray-300 mb-5">
-            <i class="fa-solid fa-sparkles text-brand-pink"></i>
-            <span>تغيير حقيقي ينتظرك في مسيرتك المهنية</span>
+    <!-- 1. HERO SECTION -->
+    <section class="relative min-h-[90vh] flex flex-col justify-center items-center bg-primary text-white overflow-hidden px-4 pt-12 pb-16 text-center">
+        <!-- خلفية جمالية هندسية ناعمة -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute top-[-10%] right-[-10%] w-[300px] h-[300px] rounded-full bg-secondary blur-[100px]"></div>
+            <div class="absolute bottom-[-10%] left-[-10%] w-[250px] h-[250px] rounded-full bg-secondary blur-[80px]"></div>
         </div>
 
-        <!-- العنوان الرئيسي المخصص لحجم شاشة الجوال العريضة والصغيرة -->
-        <h1 class="text-3xl font-black leading-snug mb-4">
-            استعد للدورة الاحترافية <br>
-            <span class="bg-gradient-to-l from-brand-purple via-brand-pink to-brand-amber bg-clip-text text-transparent">
-                الأقوى قريباً جداً!
-            </span>
-        </h1>
-
-        <p class="text-sm text-gray-400 leading-relaxed max-w-sm mx-auto mb-8 px-1">
-            جمعنا لك الخلاصة العملية التي تمنحك تفوقاً حقيقياً وبأحدث الاستراتيجيات المبتكرة. استعد لتجربة تعليمية فريدة!
-        </p>
-    </main>
-
-    <!-- 3. قسم ميزات الدورة (تمرير أفقي ذكي مثل التطبيقات المودرن) -->
-    <section class="relative z-10 mb-8">
-        <div class="px-5 mb-3 flex justify-between items-center">
-            <h2 class="text-sm font-bold text-gray-400 tracking-wider">لماذا هذه الدورة بالتحديد؟</h2>
-            <span class="text-[11px] text-brand-purple flex items-center gap-1">اسحب لليمين <i class="fa-solid fa-arrow-left text-[9px]"></i></span>
-        </div>
-
-        <!-- حاوية السحب الأفقي للبطاقات -->
-        <div class="flex gap-4 overflow-x-auto px-5 pb-4 snap-x snap-mandatory hide-scrollbar">
-            
-            <!-- كرت 1 -->
-            <div class="bg-brand-card/60 border border-white/[0.06] p-5 rounded-2xl w-[82vw] shrink-0 snap-start shadow-xl backdrop-blur-md">
-                <div class="w-10 h-10 rounded-xl bg-brand-purple/10 flex items-center justify-center text-brand-purple text-lg mb-4">
-                    <i class="fa-solid fa-cubes-stacked"></i>
-                </div>
-                <h3 class="text-base font-bold mb-2 text-white">منهجية EX360 الاحترافية</h3>
-                <p class="text-gray-400 text-xs leading-relaxed">
-                    تم بناء محتوى الدورة وتطويره بالكامل بناءً على المنهج التدريبي المعتمد والمثبت نجاحه لضمان تجربة مثمرة ومنظمة.
-                </p>
+        <div class="max-w-xl mx-auto z-10 flex flex-col items-center fade-in-up visible">
+            <!-- الشعار / أيقونة الهوية الفاخرة -->
+            <div class="mb-6 flex items-center justify-center p-3 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm">
+                <i data-lucide="award" class="w-10 h-10 text-secondary"></i>
+                <span class="mr-2 text-xs font-bold tracking-widest text-secondary uppercase">برنامج تدريبي تخصصي</span>
             </div>
 
-            <!-- كرت 2 -->
-            <div class="bg-brand-card/60 border border-white/[0.06] p-5 rounded-2xl w-[82vw] shrink-0 snap-start shadow-xl backdrop-blur-md">
-                <div class="w-10 h-10 rounded-xl bg-brand-pink/10 flex items-center justify-center text-brand-pink text-lg mb-4">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <h3 class="text-base font-bold mb-2 text-white">تطبيق عملي فوري</h3>
-                <p class="text-gray-400 text-xs leading-relaxed">
-                    لن تكون مجرد متلقٍ؛ الدورة غنية بالتمارين المكثفة والأمثلة الواقعية التي تمنحك تجربة حية تماثل سوق العمل تماماً.
-                </p>
-            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-white mb-4">
+                صناعة المحتوى التوعوي <br/>
+                <span class="text-secondary inline-block mt-2">للجهات الحكومية</span>
+            </h1>
 
-            <!-- كرت 3 -->
-            <div class="bg-brand-card/60 border border-white/[0.06] p-5 rounded-2xl w-[82vw] shrink-0 snap-start shadow-xl backdrop-blur-md">
-                <div class="w-10 h-10 rounded-xl bg-brand-amber/10 flex items-center justify-center text-brand-amber text-lg mb-4">
-                    <i class="fa-solid fa-crown"></i>
-                </div>
-                <h3 class="text-base font-bold mb-2 text-white">أسرار حصرية ومثبتة</h3>
-                <p class="text-gray-400 text-xs leading-relaxed">
-                    نشاركك خلاصة سنوات طويلة من الخبرة الميدانية وتفاصيل دقيقة لا تتوفر في أي مصادر أو قنوات تعليمية عادية.
-                </p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- 4. صندوق الترقب والإطلاق المعلق -->
-    <section class="relative z-10 px-5 mb-10">
-        <div class="bg-gradient-to-b from-brand-card to-[#0d101a] border border-white/[0.07] p-6 rounded-2xl text-center relative overflow-hidden shadow-2xl">
-            <!-- إضاءة داخلية صغيرة -->
-            <div class="absolute -top-10 -left-10 w-24 h-24 bg-brand-amber/10 rounded-full blur-xl"></div>
-            
-            <div class="w-12 h-12 rounded-full bg-brand-amber/10 border border-brand-amber/20 flex items-center justify-center mx-auto mb-3">
-                <i class="fa-solid fa-fire text-lg text-brand-amber animate-bounce"></i>
-            </div>
-            
-            <h3 class="text-lg font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-amber-200">ترقبوا إطلاق الكنز التعليمي!</h3>
-            <p class="text-xs text-gray-400 max-w-xs mx-auto mb-4 leading-relaxed">
-                التحضيرات في مراحلها النهائية لتقديم تجربة متكاملة. لا توجد مواعيد معقدة، فقط كونوا مستعدين.
+            <p class="text-base text-gray-300 font-light max-w-sm mx-auto mb-8 leading-relaxed">
+                امتلك أدوات التأثير وصياغة الرسائل الاستراتيجية التي تلامس المجتمع، وتعزز الهوية المؤسسية بكفاءة واحترافية عالية.
             </p>
-            
-            <div class="text-[11px] text-brand-amber font-bold bg-brand-amber/5 border border-brand-amber/10 py-2 px-4 rounded-full w-fit mx-auto">
-                <span>الإطلاق بات أقرب مما تتصورون!</span>
+
+            <div class="w-full px-4">
+                <a href="#about" class="w-full inline-flex items-center justify-center py-4 px-6 rounded-xl text-lg font-bold text-primary bg-secondary hover:bg-[#b3966f] active:scale-[0.98] transition-all duration-200 shadow-lg shadow-secondary/20">
+                    اكتشف ملامح الدورة
+                    <i data-lucide="chevron-left" class="mr-2 w-5 h-5"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- 5. الحث على الفعل (Call To Action الزر الرئيسي المتوهج) -->
-    <section class="relative z-10 px-5 text-center mb-12">
-        <h2 class="text-xl font-bold mb-3">لا تفوت فرصة التغيير 💥</h2>
-        <p class="text-xs text-gray-400 max-w-xs mx-auto mb-6">
-            المقاعد المخصصة للمجموعة الأولى من المنضمين ستكون محدودة للغاية لضمان جودة تفاعل ممتازة ومثمرة.
-        </p>
-        
-        <!-- زر جوال عريض وسهل الضغط ومريح للإبهام -->
-        <div class="w-full relative group">
-            <div class="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-brand-purple via-brand-pink to-brand-amber opacity-40 blur-md animate-pulse"></div>
-            <button class="w-full relative bg-black border border-white/10 px-6 py-4 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2.5 active:scale-[0.98] transition-all">
-                <i class="fa-solid fa-hourglass-start text-brand-pink text-xs animate-spin"></i>
-                <span>ترقبوا الانطلاق الحاسم في الأيام القادمة</span>
+    <!-- 2. ABOUT SECTION (نبذة عن الدورة) -->
+    <section id="about" class="py-16 px-4 max-w-lg mx-auto fade-in-up">
+        <div class="text-center mb-8">
+            <h2 class="text-xs font-bold tracking-wider text-secondary uppercase mb-2">عن البرنامج</h2>
+            <p class="text-2xl font-bold text-primary">الاستثمار الأمثل في الاتصال الحكومي</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100/80 leading-relaxed">
+            <p class="text-gray-600 mb-4">
+                تأتي هذه الدورة لتسد فجوة حقيقية في كيفية تخطيط وتصميم الحملات التوعوية داخل القطاع العام. نحن لا نعلّم فقط الكتابة، بل نمنحك منهجية متكاملة لصناعة محتوى موثوق يتماشى مع السياسات الوطنية والتوجهات الاستراتيجية لكل جهة.
+            </p>
+            <div class="flex items-center gap-3 p-3 bg-primary/5 rounded-xl border-r-4 border-secondary">
+                <i data-lucide="sparkles" class="w-5 h-5 text-secondary shrink-0"></i>
+                <span class="text-sm font-semibold text-primary">محتوى تفاعلي، مبني على دراسات حالة واقعية ومجربة.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. WHY CHOOSE THIS COURSE (لماذا تختار هذه الدورة؟) -->
+    <section class="py-16 px-4 bg-primary text-white">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-10 fade-in-up">
+                <h2 class="text-xs font-bold text-secondary uppercase mb-2">القيمة المضافة</h2>
+                <p class="text-2xl font-bold">لماذا هذه الدورة دون غيرها؟</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex gap-4 p-5 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="p-3 bg-secondary/10 rounded-xl h-fit">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">منهجية رسمية معتمدة</h3>
+                        <p class="text-sm text-gray-300 leading-relaxed">مصممة خصيصاً لتناسب الضوابط والسياسات الخاصة بالمنظمات الحكومية.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 p-5 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="p-3 bg-secondary/10 rounded-xl h-fit">
+                        <i data-lucide="target" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">تركيز على النتائج</h3>
+                        <p class="text-sm text-gray-300 leading-relaxed">تعلّم كيف تقيس أثر حملتك التوعوية وضمان وصولها للفئة المستهدفة بدقة.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 p-5 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="p-3 bg-secondary/10 rounded-xl h-fit">
+                        <i data-lucide="layers" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">تطبيق عملي فوري</h3>
+                        <p class="text-sm text-gray-300 leading-relaxed">ورش عمل حية تمكنك من صياغة استراتيجية توعوية متكاملة لجهتك خلال الدورة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. KEY FEATURES (أهم المميزات) -->
+    <section class="py-16 px-4 max-w-lg mx-auto">
+        <div class="text-center mb-10 fade-in-up">
+            <h2 class="text-xs font-bold text-secondary uppercase mb-2">مميزات التجربة</h2>
+            <p class="text-2xl font-bold">ما ستحصل عليه أثناء التدريب</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4">
+            <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100 fade-in-up">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                <span class="text-sm font-medium text-gray-700 leading-relaxed">أدوات ونماذج جاهزة للتطبيق المباشر في جهتك الحكومية.</span>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100 fade-in-up">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                <span class="text-sm font-medium text-gray-700 leading-relaxed">تحليل حي لأبرز الحملات التوعوية الناجحة محلياً وعالمياً.</span>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100 fade-in-up">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                <span class="text-sm font-medium text-gray-700 leading-relaxed">بيئة تفاعلية لتبادل الخبرات مع صناع القرار في الاتصال المؤسسي.</span>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100 fade-in-up">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                <span class="text-sm font-medium text-gray-700 leading-relaxed">توجيه مخصص ومباشر لتطوير أفكارك ومشروعاتك التوعوية.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SKILLS ACQUIRED (المهارات التي ستكتسبها) -->
+    <section class="py-16 px-4 bg-gray-100">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-10 fade-in-up">
+                <h2 class="text-xs font-bold text-secondary uppercase mb-2">التمكين المهني</h2>
+                <p class="text-2xl font-bold">مهارات تصنع فارقاً حقيقياً</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200/60 flex flex-col justify-between fade-in-up">
+                    <i data-lucide="book-open" class="w-6 h-6 text-secondary mb-3"></i>
+                    <span class="text-sm font-bold text-primary leading-tight">التخطيط الاستراتيجي للمحتوى</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200/60 flex flex-col justify-between fade-in-up">
+                    <i data-lucide="target" class="w-6 h-6 text-secondary mb-3"></i>
+                    <span class="text-sm font-bold text-primary leading-tight">هندسة الرسائل التوعوية</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200/60 flex flex-col justify-between fade-in-up">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-secondary mb-3"></i>
+                    <span class="text-sm font-bold text-primary leading-tight">إدارة المخاطر الإعلامية</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200/60 flex flex-col justify-between fade-in-up">
+                    <i data-lucide="trending-up" class="w-6 h-6 text-secondary mb-3"></i>
+                    <span class="text-sm font-bold text-primary leading-tight">تحليل وقياس الأثر المجتمعي</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. WHO IS THIS FOR (لمن هذه الدورة؟) -->
+    <section class="py-16 px-4 max-w-lg mx-auto">
+        <div class="text-center mb-10 fade-in-up">
+            <h2 class="text-xs font-bold text-secondary uppercase mb-2">المستهدفون</h2>
+            <p class="text-2xl font-bold">الفئات الأكثر استفادة من البرنامج</p>
+        </div>
+
+        <div class="space-y-3">
+            <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 fade-in-up">
+                <div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
+                    <i data-lucide="users" class="w-5 h-5 text-primary"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-700">مدراء وموظفو إدارات الاتصال المؤسسي والإعلام.</span>
+            </div>
+            <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 fade-in-up">
+                <div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
+                    <i data-lucide="briefcase" class="w-5 h-5 text-primary"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-700">صناع المحتوى والمستشارون الإعلاميون في القطاع العام.</span>
+            </div>
+            <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 fade-in-up">
+                <div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
+                    <i data-lucide="award" class="w-5 h-5 text-primary"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-700">المشرفون على الحسابات والمنصات الرقمية الحكومية.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. WHAT YOU WILL ACHIEVE (ماذا ستحقق بعد الدورة؟) -->
+    <section class="py-16 px-4 bg-primary text-white">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-10 fade-in-up">
+                <h2 class="text-xs font-bold text-secondary uppercase mb-2">رؤية مستقبلية</h2>
+                <p class="text-2xl font-bold">أثر مستدام يمتد لجهتك وعملك</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-start gap-3 fade-in-up">
+                    <div class="w-2 h-2 rounded-full bg-secondary mt-2 shrink-0"></div>
+                    <p class="text-sm font-light text-gray-300 leading-relaxed">القدرة على بناء حملات توعوية ذات كفاءة إنفاق عالية وأثر ملموس.</p>
+                </div>
+                <div class="flex items-start gap-3 fade-in-up">
+                    <div class="w-2 h-2 rounded-full bg-secondary mt-2 shrink-0"></div>
+                    <p class="text-sm font-light text-gray-300 leading-relaxed">الريادة في صياغة الرسائل التوعوية والحد من الشائعات أو الأخطاء الاتصالية.</p>
+                </div>
+                <div class="flex items-start gap-3 fade-in-up">
+                    <div class="w-2 h-2 rounded-full bg-secondary mt-2 shrink-0"></div>
+                    <p class="text-sm font-light text-gray-300 leading-relaxed">نقل المعرفة والمنهجية الحديثة لفريق عملك داخل الجهة الرسمية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. CALL TO ACTION (التحفيز النهائي للاتصال) -->
+    <section class="py-20 px-4 text-center bg-white border-t border-gray-100">
+        <div class="max-w-xs mx-auto fade-in-up">
+            <h2 class="text-2xl font-extrabold text-primary mb-4">انطلق في مسار التميز الاتصالي</h2>
+            <p class="text-sm text-gray-500 mb-8 leading-relaxed">
+                استعد لقيادة دفة التوعية والتأثير في جهتك الحكومية بأحدث الأساليب والممارسات العلمية.
+            </p>
+            <button onclick="alert('تم تسجيل اهتمامك بالبرنامج بنجاح!')" class="w-full inline-flex items-center justify-center py-4 px-6 rounded-xl text-lg font-bold text-white bg-primary hover:bg-[#152954] active:scale-[0.98] transition-all duration-200 shadow-xl shadow-primary/10">
+                ابدأ رحلتك المعرفية الآن
             </button>
         </div>
     </section>
 
-    <!-- الفوتر الختامي المصغر لجوال أنيق -->
-    <footer class="relative z-10 border-t border-white/5 py-6 text-center text-gray-600 text-[11px] px-5">
-        <p class="mb-1">جميع الحقوق محفوظة © <span id="current-year"></span> للدورة التدريبية</p>
-        <p class="text-[10px] text-gray-700">مبني ومستوحى من الحقيبة التدريبية المعتمدة <span class="font-bold text-gray-600">EX360</span></p>
+    <!-- FOOTER -->
+    <footer class="py-6 px-4 text-center text-xs text-gray-400 bg-gray-50 border-t border-gray-200/50">
+        <p>© 2026 صناعة المحتوى التوعوي للجهات الحكومية. جميع الحقوق محفوظة.</p>
     </footer>
 
+    <!-- تشغيل مكتبة الأيقونات وتأثيرات التمرير الجمالية -->
     <script>
-        // تحديث السنة تلقائياً
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        // تفعيل الأيقونات
+        lucide.createIcons();
+
+        // تفعيل تأثير التمرير للـ Elements (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
