@@ -2,21 +2,21 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>الدورة المرتقبة - EX360</title>
     
-    <!-- تضمين إطار العمل Tailwind CSS للتصميم العصري والسريع -->
+    <!-- تضمين إطار العمل Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- خط تجول (Tajawal) العربي الفخم والمقروء من جوجل -->
+    <!-- خط تجول (Tajawal) العربي -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- أيقونات Font Awesome الفخمة للعناصر التفاعلية والجمالية -->
+    <!-- أيقونات Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- إعدادات مخصصة لـ Tailwind للتناسق البصري والألوان الجاذبة -->
+    <!-- إعدادات Tailwind المخصصة والتجاوب للجوال -->
     <script>
         tailwind.config = {
             theme: {
@@ -26,17 +26,22 @@
                     },
                     colors: {
                         brand: {
-                            dark: '#070a13', // خلفية داكنة جداً وفخمة باللون الكحلي المسود
-                            card: '#111827', // لون بطاقات زجاجي داكن ومتناسق
-                            accent: '#8b5cf6', // لون البنفسجي الساحر
-                            highlight: '#ec4899', // درجات الوردي النيون الحماسية
-                            gold: '#f59e0b' // درجات الذهبي للإشعاع والتميز
+                            dark: '#070a13',
+                            card: '#111827',
+                            accent: '#8b5cf6',
+                            highlight: '#ec4899',
+                            gold: '#f59e0b'
                         }
                     },
                     animation: {
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'spin-slow': 'spin 15s linear infinite',
                         'float': 'float 3s ease-in-out infinite',
+                    },
+                    // إضافة إعدادات التباعد المخصصة للجوال
+                    spacing: {
+                        'safe-top': 'env(safe-area-inset-top)',
+                        'safe-bottom': 'env(safe-area-inset-bottom)',
                     }
                 }
             }
@@ -47,199 +52,202 @@
         body {
             background-color: #070a13;
             overflow-x: hidden;
+            /* تحسين تجربة التمرير على الجوال */
+            -webkit-overflow-scrolling: touch;
         }
-        /* تأثير التوهج الملون في الخلفية لمظهر تقني معاصر */
+        /* مؤثرات إضاءة أصغر وأكثر دقة للجوال */
         .glow-blob {
-            filter: blur(140px);
-            opacity: 0.18;
+            filter: blur(80px); /* تقليل البلور للجوال */
+            opacity: 0.15;
             pointer-events: none;
+            position: absolute;
+            z-index: 0;
         }
-        /* حركة طفو خفيفة للعناصر التفاعلية لإضفاء حيوية */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-5px); } /* تقليل الحركة للجوال */
         }
         .animate-float {
             animation: float 4s ease-in-out infinite;
         }
-        /* مظهر مخصص لـ Scrollbar ليتناسب مع فخامة الموقع */
+        /* إخفاء السكرول بار تماماً لمظهر أنظف على الجوال */
         ::-webkit-scrollbar {
-            width: 10px;
+            display: none;
         }
-        ::-webkit-scrollbar-track {
-            background: #070a13;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1f293d;
-            border-radius: 5px;
-            border: 2px solid #070a13;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #8b5cf6;
+        
+        /* تحسين النصوص الطويلة على الشاشات الصغيرة جداً */
+        @media (max-width: 350px) {
+            .hero-title {
+                font-size: 1.75rem !important;
+                line-height: 1.2 !important;
+            }
         }
     </style>
 </head>
-<body class="text-white font-sans antialiased">
+<body class="text-white font-sans antialiased bg-brand-dark">
 
-    <!-- مؤثرات الإضاءة الجمالية موزعة بزوايا الصفحة لتصميم عميق ومستقبلي -->
-    <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-purple-600 glow-blob rounded-full"></div>
-    <div class="absolute top-1/3 left-10 w-96 h-96 bg-pink-600 glow-blob rounded-full"></div>
-    <div class="absolute bottom-20 right-10 w-[450px] h-[450px] bg-blue-600 glow-blob rounded-full"></div>
+    <!-- مؤثرات الإضاءة الجمالية (محسنة للجوال) -->
+    <div class="glow-blob top-0 right-0 w-64 h-64 bg-purple-600"></div>
+    <div class="glow-blob top-1/2 left-[-100px] w-52 h-52 bg-pink-600"></div>
+    <div class="glow-blob bottom-10 right-[-50px] w-60 h-60 bg-blue-600"></div>
 
     <!-- 1. الهيدر (رأس الصفحة) -->
-    <header class="relative z-10">
-        <div class="container mx-auto px-6 py-8 flex justify-between items-center">
-            <!-- الشعار مع أيقونة تخرج برونزية متألقة -->
-            <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
-                    <i class="fa-solid fa-graduation-cap text-xl text-white"></i>
+    <header class="relative z-10 border-b border-gray-800/50 backdrop-blur-sm sticky top-0">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center relative">
+            <!-- الشعار -->
+            <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-500 flex items-center justify-center shadow-lg shadow-purple-500/10">
+                    <i class="fa-solid fa-graduation-cap text-lg text-white"></i>
                 </div>
-                <span class="text-2xl font-black tracking-wide bg-gradient-to-l from-white via-gray-100 to-gray-400 bg-clip-text text-transparent">EX360</span>
+                <span class="text-xl font-black tracking-wide bg-gradient-to-l from-white via-gray-100 to-gray-400 bg-clip-text text-transparent">EX360</span>
             </div>
-            <!-- إشارة حالة التحضير الحية والنابضة باللون النيوني -->
-            <div class="flex items-center gap-2.5 bg-purple-950/40 border border-purple-500/30 px-5 py-2 rounded-full backdrop-blur-md shadow-lg">
-                <span class="w-3 h-3 rounded-full bg-pink-500 animate-ping"></span>
-                <span class="text-xs md:text-sm font-bold text-purple-200">التحضيرات جارية لإطلاقها قريباً</span>
+            <!-- إشارة حالة التحضير (أصغر ومناسبة للجوال) -->
+            <div class="flex items-center gap-2 bg-purple-950/30 border border-purple-500/20 px-3 py-1.5 rounded-full backdrop-blur-md">
+                <span class="w-2.5 h-2.5 rounded-full bg-pink-500 animate-ping"></span>
+                <span class="text-[11px] font-bold text-purple-200">قريباً جداً</span>
             </div>
         </div>
     </header>
 
     <!-- 2. قسم البطولة والترويج الحماسي (Hero Section) -->
-    <main class="relative z-10 container mx-auto px-6 pt-12 pb-16 text-center max-w-4xl">
-        <!-- شارة ترحيبية وتنبيهية محفزة -->
-        <div class="inline-flex items-center gap-2 bg-gradient-to-l from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-purple-300 px-5 py-2.5 rounded-full text-sm font-semibold mb-8 shadow-sm">
+    <main class="relative z-10 container mx-auto px-4 pt-10 pb-12 text-center">
+        <!-- شارة ترحيبية -->
+        <div class="inline-flex items-center gap-2 bg-gradient-to-l from-purple-500/10 to-pink-500/10 border border-purple-500/15 text-purple-300 px-4 py-2 rounded-full text-xs font-semibold mb-6 shadow-sm max-w-[90%]mx-auto">
             <i class="fa-solid fa-sparkles text-pink-400 animate-pulse"></i>
-            <span>تغيير حقيقي ينتظرك في مسيرتك المهنية والشخصية</span>
+            <span class="truncate">تغيير حقيقي ينتظرك في مسيرتك</span>
         </div>
 
-        <!-- العنوان الرئيسي الناري الفخم والخالي تماماً من الأكواد والملفات القديمة -->
-        <h1 class="text-4xl md:text-7xl font-black tracking-tight mb-8 leading-tight">
-            استعد للدورة الاحترافية الأقوى <br>
+        <!-- العنوان الرئيسي (محسن للجوال) -->
+        <h1 class="hero-title text-3xl md:text-5xl font-black tracking-tight mb-6 leading-tight px-2">
+            استعد للدورة الاحترافية <br>
             <span class="bg-gradient-to-l from-purple-400 via-pink-500 to-amber-400 bg-clip-text text-transparent">
-                القادمة قريباً جداً!
+                الأقوى قريباً!
             </span>
         </h1>
 
-        <!-- وصف حماسي محفز لتشجيع الحضور وترقّب الحدث الرئيسي -->
-        <p class="text-lg md:text-2xl text-gray-300 mb-14 max-w-3xl mx-auto leading-relaxed font-light">
-            جمعنا لك هنا الخلاصة العملية التي تمنحك تفوقاً حقيقياً وبأحدث الاستراتيجيات الاحترافية المبتكرة. استعد لتجربة تعليمية فريدة تنقلك من الصفر إلى مستويات غير مسبوقة من التميز والإبداع!
+        <!-- وصف حماسي -->
+        <p class="text-base md:text-xl text-gray-300 mb-10 max-w-xl mx-auto leading-relaxed font-light px-2">
+            جمعنا لك الخلاصة العملية التي تمنحك تفوقاً حقيقياً وبأحدث الاستراتيجيات المبتكرة. استعد لتجربة فريدة تنقلك للتميز!
         </p>
 
-        <!-- صندوق ترقب زجاجي فخم وراقي يدعو للاهتمام دون قيود عداد وقت -->
-        <div class="bg-slate-900/65 border border-slate-800 p-8 md:p-12 rounded-3xl max-w-2xl mx-auto backdrop-blur-xl shadow-2xl relative overflow-hidden animate-float">
-            <!-- خط متدرج علوي فاخر يزين الصندوق -->
-            <div class="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500"></div>
+        <!-- صندوق ترقب زجاجي (محسن للجوال) -->
+        <div class="bg-slate-900/60 border border-slate-800 p-6 md:p-10 rounded-2xl max-w-lg mx-auto backdrop-blur-xl shadow-2xl relative overflow-hidden animate-float">
+            <!-- خط متدرج علوي -->
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500"></div>
             
-            <h3 class="text-2xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-amber-300 tracking-wide">ترقبوا إطلاق الكنز التعليمي القادم!</h3>
-            <p class="text-base text-gray-300 max-w-lg mx-auto mb-8 leading-relaxed">
-                التحضيرات في مراحلها النهائية لتقديم تجربة تدريبية متكاملة تليق بتطلعاتكم وتتجاوز توقعاتكم. لا توجد مواعيد معقدة، فقط ترقبوا الإعلان الرسمي الحاسم فور جهوزيته.
+            <h3 class="text-xl font-black mb-3 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-amber-300 tracking-wide">ترقبوا الكنز التعليمي!</h3>
+            <p class="text-sm text-gray-300 max-w-sm mx-auto mb-6 leading-relaxed">
+                التحضيرات في مراحلها النهائية لتقديم تجربة تليق بتطلعاتكم. لا تعقيدات، فقط ترقبوا الإعلان الرسمي.
             </p>
             
-            <div class="flex justify-center items-center gap-3 text-base text-amber-400 font-bold bg-amber-500/10 py-4 px-8 rounded-full border border-amber-500/20 w-fit mx-auto shadow-inner">
-                <i class="fa-solid fa-bell animate-bounce"></i>
-                <span>كونوا في الموعد.. الإطلاق بات أقرب مما تتصورون!</span>
+            <div class="flex justify-center items-center gap-2.5 text-sm text-amber-400 font-bold bg-amber-500/10 py-3 px-6 rounded-full border border-amber-500/15 w-fit mx-auto shadow-inner">
+                <i class="fa-solid fa-bell animate-bounce text-xs"></i>
+                <span>الإطلاق بات أقرب مما تتصورون!</span>
             </div>
         </div>
     </main>
 
-    <!-- 3. قسم ميزات الدورة (لماذا يجب أن تتحمس؟) -->
-    <section class="relative z-10 py-20 bg-slate-950/40 border-t border-slate-900/60">
-        <div class="container mx-auto px-6 max-w-5xl">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-black mb-4 bg-gradient-to-l from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">لماذا هذه الدورة بالتحديد هي ما تحتاجه؟</h2>
-                <p class="text-gray-400 max-w-xl mx-auto text-base">منهج متكامل مصمم بدقة لترقية مهاراتك بشكل فوري وقوي.</p>
+    <!-- 3. قسم ميزات الدورة (ترتيب رأسي للجوال) -->
+    <section class="relative z-10 py-16 bg-slate-950/40 border-t border-slate-900/50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl md:text-4xl font-black mb-3 bg-gradient-to-l from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">لماذا هذه الدورة هي ما تحتاجه؟</h2>
+                <p class="text-gray-400 max-w-xs mx-auto text-sm">منهج متكامل لترقية مهاراتك بشكل فوري وقوي.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- بطاقة ميزة 1 - هيكلة EX360 -->
-                <div class="bg-slate-900/30 border border-slate-800 p-8 rounded-2xl hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-2 group">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <!-- شبكة الميزات: عمود واحد على الجوال، 3 أعمدة على الكمبيوتر -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- بطاقة ميزة 1 -->
+                <div class="bg-slate-900/30 border border-slate-800 p-6 rounded-xl hover:border-purple-500/40 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 text-xl mb-5 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 shadow-md">
                         <i class="fa-solid fa-cubes-stacked"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-white group-hover:text-purple-400 transition-colors duration-300">منهجية EX360 الاحترافية</h3>
+                    <h3 class="text-lg font-bold mb-2.5 text-white group-hover:text-purple-400 transition-colors duration-300">منهجية EX360 الاحترافية</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        تم بناء محتوى الدورة الاستثنائية وتطويره بالكامل بناءً على المنهج التدريبي المعتمد والمثبت نجاحه في <span class="text-purple-400 font-bold">EX360</span> لضمان تجربة مثمرة ومنظمة.
+                        تم بناء المحتوى وتطويره بناءً على المنهج التدريبي المعتمد والمثبت نجاحه في <span class="text-purple-400 font-bold">EX360</span> لضمان تجربة مثمرة.
                     </p>
                 </div>
 
-                <!-- بطاقة ميزة 2 - تطبيق عملي فوري -->
-                <div class="bg-slate-900/30 border border-slate-800 p-8 rounded-2xl hover:border-pink-500/40 transition-all duration-300 hover:-translate-y-2 group">
-                    <div class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-400 text-2xl mb-6 group-hover:bg-pink-600 group-hover:text-white transition-all duration-300 shadow-md">
+                <!-- بطاقة ميزة 2 -->
+                <div class="bg-slate-900/30 border border-slate-800 p-6 rounded-xl hover:border-pink-500/40 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-pink-500/10 flex items-center justify-center text-pink-400 text-xl mb-5 group-hover:bg-pink-600 group-hover:text-white transition-all duration-300 shadow-md">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-white group-hover:text-pink-400 transition-colors duration-300">تطبيق عملي فوري</h3>
+                    <h3 class="text-lg font-bold mb-2.5 text-white group-hover:text-pink-400 transition-colors duration-300">تطبيق عملي فوري</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        لن تكون مجرد متلقٍ؛ الدورة غنية بالتمارين المكثفة والأمثلة الواقعية التي تمنحك تجربة حية تماثل سوق العمل تماماً وتجعلك تتقن كل الأفكار بسهولة وسرعة.
+                        الدورة غنية بالتمارين المكثفة والأمثلة الواقعية التي تمنحك تجربة حية تماثل سوق العمل وتجعل تتقن الأفكار بسرعة.
                     </p>
                 </div>
 
-                <!-- بطاقة ميزة 3 - أسرار حصرية -->
-                <div class="bg-slate-900/30 border border-slate-800 p-8 rounded-2xl hover:border-amber-500/40 transition-all duration-300 hover:-translate-y-2 group">
-                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-2xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300 shadow-md">
+                <!-- بطاقة ميزة 3 -->
+                <div class="bg-slate-900/30 border border-slate-800 p-6 rounded-xl hover:border-amber-500/40 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl mb-5 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300 shadow-md">
                         <i class="fa-solid fa-crown"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-white group-hover:text-amber-400 transition-colors duration-300">أسرار حصرية ومثبتة</h3>
+                    <h3 class="text-lg font-bold mb-2.5 text-white group-hover:text-amber-400 transition-colors duration-300">أسرار حصرية ومثبتة</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        نشاركك خلاصة سنوات طويلة من الخبرة الميدانية وتفاصيل دقيقة لا تتوفر في أي مصادر أو قنوات تعليمية عادية لتصنع فارقاً حقيقياً في أدائك وقيمتك المهنية.
+                        نشاركك خلاصة سنوات من الخبرة وتفاصيل دقيقة لا تتوفر في مصادر عادية لتصنع فارقاً في أدائك وقيمتك المهنية.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. قسم الكشف عن التفاصيل التفاعلية المشوقة -->
-    <section class="relative z-10 py-12">
-        <div class="container mx-auto px-6 max-w-4xl bg-gradient-to-tr from-slate-900 via-slate-900/80 to-slate-950 border border-slate-800/80 rounded-3xl p-8 md:p-14 shadow-2xl relative overflow-hidden">
-            <!-- تزيين خلفي باللون النيوني الوردي الخلاب -->
-            <div class="absolute -bottom-20 -left-20 w-72 h-72 bg-pink-600/10 rounded-full blur-3xl"></div>
+    <!-- 4. قسم الكشف عن التفاصيل (ترتيب رأسي للجوال) -->
+    <section class="relative z-10 py-12 px-4">
+        <div class="container mx-auto max-w-3xl bg-gradient-to-tr from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800/80 rounded-2xl p-6 md:p-12 shadow-2xl relative overflow-hidden">
+            <!-- تزيين خلفي -->
+            <div class="absolute -bottom-20 -left-20 w-52 h-52 bg-pink-600/10 rounded-full blur-3xl p-ointer-events-none"></div>
             
-            <div class="text-center md:text-right md:flex items-center justify-between gap-12 relative z-10">
-                <div class="mb-8 md:mb-0">
-                    <span class="text-purple-400 font-black uppercase tracking-wider text-sm block mb-3">⚡ مقتطفات ترويجية</span>
-                    <h2 class="text-3xl md:text-4xl font-extrabold mb-5 leading-tight">جاهز لرحلة التعلم الاستثنائية؟</h2>
-                    <p class="text-gray-300 leading-relaxed max-w-xl text-base">
-                        لقد تم تصميم هذه الرحلة لتكون فريدة ومبهرة من نوعها. التفاصيل الكاملة في العرض التقديمي <span class="text-purple-300 font-bold">EX360</span> ستبهرك عند الإطلاق وتضع يدك على أحدث المهارات التي ينتظرها الجميع.
-                    </p>
-                </div>
+            <!-- ترتيب عناصر مرن: رأسي على الجوال، أفقي على الكمبيوتر -->
+            <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12 relative z-10 text-center md:text-right">
                 <div class="flex-shrink-0 flex justify-center">
-                    <!-- أيقونة نارية متحركة مع إطار متوهج -->
-                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-tr from-purple-600/20 via-pink-500/20 to-amber-500/20 border border-purple-500/30 flex items-center justify-center p-4 relative animate-pulse-slow">
+                    <!-- أيقونة نارية متحركة (أصغر للجوال) -->
+                    <div class="w-28 h-28 md:w-36 md:h-36 rounded-full bg-gradient-to-tr from-purple-600/20 via-pink-500/20 to-amber-500/20 border border-purple-500/25 flex items-center justify-center p-3 relative animate-pulse-slow">
                         <div class="w-full h-full rounded-full bg-[#0a0f1d] border border-slate-800 flex flex-col items-center justify-center text-center">
-                            <i class="fa-solid fa-fire text-4xl text-transparent bg-clip-text bg-gradient-to-tr from-pink-500 to-amber-400 animate-bounce"></i>
-                            <span class="text-xs font-black text-gray-300 mt-3 tracking-wider">ترقبوها!</span>
+                            <i class="fa-solid fa-fire text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-tr from-pink-500 to-amber-400 animate-bounce"></i>
+                            <span class="text-[10px] md:text-xs font-black text-gray-300 mt-2 tracking-wider">ترقبوها!</span>
                         </div>
                     </div>
                 </div>
+                
+                <div class="mb-0">
+                    <span class="text-purple-400 font-black uppercase tracking-wider text-xs block mb-2">⚡ مقتطفات ترويجية</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold mb-4 leading-tight">جاهز لرحلة التعلم؟</h2>
+                    <p class="text-gray-300 leading-relaxed max-w-md text-sm md:text-base mx-auto md:mx-0">
+                        التفاصيل الكاملة في العرض التقديمي <span class="text-purple-300 font-bold">EX360</span> ستبهرك عند الإطلاق وتضع يدك على أحدث المهارات.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. قسم التذكير والتحفيز النهائي (Call to Action) -->
-    <section class="relative z-10 py-20 text-center container mx-auto px-6 max-w-3xl">
-        <h2 class="text-3xl md:text-5xl font-black mb-6 bg-gradient-to-l from-white to-gray-200 bg-clip-text text-transparent">لا تفوت فرصة التغيير القادمة 💥</h2>
-        <p class="text-gray-400 leading-relaxed mb-10 text-base md:text-lg">
-            بادر بمتابعتنا وترقب موعد الإطلاق الرسمي القريب جداً. المقاعد المخصصة للمجموعة الأولى من المنضمين ستكون محدودة للغاية لضمان جودة تفاعل ممتازة ومثمرة.
+    <!-- 5. قسم التذكير والتحفيز النهائي (محسن للجوال) -->
+    <section class="relative z-10 py-16 text-center container mx-auto px-4 max-w-2xl">
+        <h2 class="text-2xl md:text-4xl font-black mb-5 bg-gradient-to-l from-white to-gray-200 bg-clip-text text-transparent px-2">لا تفوت فرصة التغيير القادمة 💥</h2>
+        <p class="text-gray-400 leading-relaxed mb-10 text-sm md:text-base px-2">
+            بادر بمتابعتنا وترقب موعد الإطلاق القريب. المقاعد المخصصة للمجموعة الأولى ستكون محدودة للغاية لضمان جودة تفاعل ممتازة.
         </p>
         
-        <!-- زر ترويجي محمس جداً يتوهج بالحركة والجمال دون تعقيد -->
-        <div class="inline-block group relative">
-            <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-500 to-amber-400 opacity-70 blur-xl group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse-slow"></div>
-            <div class="relative bg-slate-950 border border-purple-500/30 px-10 py-5 rounded-2xl text-xl font-bold text-white flex items-center gap-3 shadow-lg">
-                <i class="fa-solid fa-hourglass-start text-pink-500 animate-spin-slow"></i>
-                <span>ترقبوا الانطلاق الحاسم في الأيام القادمة!</span>
+        <!-- زر ترويجي (محسن للجوال) -->
+        <div class="inline-block group relative max-w-[90%]">
+            <div class="absolute -inset-1 rounded-xl bg-gradient-to-r from-purple-600 via-pink-500 to-amber-400 opacity-60 blur-lg group-hover:opacity-100 transition duration-1000 animate-pulse-slow"></div>
+            <div class="relative bg-slate-950 border border-purple-500/25 px-6 py-4 md:px-8 md:py-5 rounded-xl text-lg md:text-xl font-bold text-white flex items-center gap-2.5 shadow-lg">
+                <i class="fa-solid fa-hourglass-start text-pink-500 animate-spin-slow text-base"></i>
+                <span class="truncate text-base md:text-lg">ترقبوا الانطلاق الحاسم قريباً!</span>
             </div>
         </div>
     </section>
 
-    <!-- الفوتر الختامي الراقي -->
-    <footer class="relative z-10 border-t border-slate-900/85 py-10 text-center text-gray-500 text-sm">
-        <p class="mb-2">جميع الحقوق محفوظة © <span id="current-year"></span> للدورة التدريبية الاستثنائية</p>
-        <p class="text-xs text-slate-600">مبني ومستوحى من الحقيبة التدريبية المعتمدة <span class="text-slate-500 font-bold">EX360</span></p>
+    <!-- الفوتر الختامي (محسن للجوال) -->
+    <footer class="relative z-10 border-t border-slate-900/70 py-8 text-center text-gray-500 text-xs px-4">
+        <p class="mb-1.5">جميع الحقوق محفوظة © <span id="current-year"></span> للدورة التدريبية الاستثنائية</p>
+        <p class="text-[10px] text-slate-600">مبني ومستوحى من الحقيبة التدريبية المعتمدة <span class="text-slate-500 font-bold">EX360</span></p>
     </footer>
 
-    <!-- جافا سكريبت تفاعلية بسيطة ومثالية -->
+    <!-- جافا سكريبت تفاعلية بسيطة -->
     <script>
-        // تحديث السنة الحالية في الفوتر تلقائياً ليبقى حديثاً دائماً
+        // تحديث السنة الحالية في الفوتر
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
