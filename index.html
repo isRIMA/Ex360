@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دورة صناعة المحتوى التوعوي للجهات الحكومية</title>
-    <!-- خط القاهرة من قوقل -->
+    <title>EX360 - برنامج تطوير الرؤساء التنفيذيين</title>
+    
+    <!-- خط تجول (Tajawal) الحديث -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     
-    <!-- تضمين Tailwind CSS عبر الـ CDN -->
+    <!-- Tailwind CSS عبر CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0B1B3D',
-                        secondary: '#C5A880',
-                        neutralBg: '#F8F9FA'
+                        navy: '#0B1B3D',
+                        gold: '#C5A880',
+                        warmBg: '#FAF9F6',
+                        softGray: '#F3F4F6'
                     },
                     fontFamily: {
-                        cairo: ['Cairo', 'sans-serif']
+                        tajawal: ['Tajawal', 'sans-serif']
                     }
                 }
             }
@@ -33,13 +35,13 @@
 
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Tajawal', sans-serif;
+            background-color: #FAF9F6;
             scroll-behavior: smooth;
         }
-        /* تأثيرات ظهور متحركة ناعمة عند التمرير */
         .fade-in-up {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(25px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         .fade-in-up.visible {
@@ -48,235 +50,282 @@
         }
     </style>
 </head>
-<body class="bg-neutralBg text-primary antialiased selection:bg-secondary selection:text-white">
+<body class="bg-warmBg text-navy antialiased selection:bg-gold selection:text-white">
 
-    <!-- 1. HERO SECTION -->
-    <section class="relative min-h-[90vh] flex flex-col justify-center items-center bg-primary text-white overflow-hidden px-4 pt-12 pb-16 text-center">
-        <!-- خلفية جمالية هندسية ناعمة -->
-        <div class="absolute inset-0 opacity-10 pointer-events-none">
-            <div class="absolute top-[-10%] right-[-10%] w-[300px] h-[300px] rounded-full bg-secondary blur-[100px]"></div>
-            <div class="absolute bottom-[-10%] left-[-10%] w-[250px] h-[250px] rounded-full bg-secondary blur-[80px]"></div>
-        </div>
-
+    <!-- 1. HERO SECTION WITH TOP COVER IMAGE -->
+    <section class="relative bg-navy text-white px-4 pt-6 pb-12 text-center overflow-hidden">
+        
         <div class="max-w-xl mx-auto z-10 flex flex-col items-center fade-in-up visible">
-            <!-- الشعار / أيقونة الهوية الفاخرة -->
-            <div class="mb-6 flex items-center justify-center p-3 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm">
-                <i data-lucide="award" class="w-10 h-10 text-secondary"></i>
-                <span class="mr-2 text-xs font-bold tracking-widest text-secondary uppercase">برنامج تدريبي تخصصي</span>
+            
+            <!-- الصورة الرئيسية المميزة في الأعلى -->
+            <div class="w-full mb-8 rounded-2xl overflow-hidden shadow-2xl border border-gold/30 bg-white/5 p-1 backdrop-blur-sm">
+                <!-- ضعي اسم صورتك المحفوظة هنا مكان ex360-hero.jpg -->
+                <img src="ex360-hero.jpg" alt="EX360 Executive Program Header" class="w-full h-auto object-cover rounded-xl shadow-inner">
+            </div>
+
+            <!-- بادج البرنامج -->
+            <div class="mb-4 inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/5 border border-gold/40 rounded-full text-gold text-xs font-bold tracking-wide">
+                <i data-lucide="crown" class="w-4 h-4"></i>
+                <span>EX360 EXECUTIVE PROGRAM</span>
             </div>
 
             <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-white mb-4">
-                صناعة المحتوى التوعوي <br/>
-                <span class="text-secondary inline-block mt-2">للجهات الحكومية</span>
+                برنامج تطوير الرؤساء التنفيذيين <br/>
+                <span class="text-gold inline-block mt-1">نحو قيادة تصنع التحول وتبني المستقبل</span>
             </h1>
 
-            <p class="text-base text-gray-300 font-light max-w-sm mx-auto mb-8 leading-relaxed">
-                امتلك أدوات التأثير وصياغة الرسائل الاستراتيجية التي تلامس المجتمع، وتعزز الهوية المؤسسية بكفاءة واحترافية عالية.
+            <p class="text-sm md:text-base text-gray-300 font-light max-w-sm mx-auto mb-8 leading-relaxed">
+                برنامج تنفيذي متقدم لبناء الرؤساء التنفيذيين من خلال التجارب العالمية، وأدوات القيادة، والذكاء الاصطناعي، ومحاكاة مجالس الإدارة.
             </p>
 
-            <div class="w-full px-4">
-                <a href="#about" class="w-full inline-flex items-center justify-center py-4 px-6 rounded-xl text-lg font-bold text-primary bg-secondary hover:bg-[#b3966f] active:scale-[0.98] transition-all duration-200 shadow-lg shadow-secondary/20">
-                    اكتشف ملامح الدورة
+            <div class="w-full px-2">
+                <a href="#why-ex360" class="w-full inline-flex items-center justify-center py-4 px-6 rounded-xl text-lg font-bold text-navy bg-gold hover:bg-[#b3966f] active:scale-[0.98] transition-all duration-200 shadow-lg shadow-gold/20">
+                    ابدأ رحلتك نحو القيادة المتقدمة
                     <i data-lucide="chevron-left" class="mr-2 w-5 h-5"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- 2. ABOUT SECTION (نبذة عن الدورة) -->
-    <section id="about" class="py-16 px-4 max-w-lg mx-auto fade-in-up">
+    <!-- 2. WHY EX360? (لماذا EX360؟) -->
+    <section id="why-ex360" class="py-16 px-4 max-w-lg mx-auto fade-in-up">
         <div class="text-center mb-8">
-            <h2 class="text-xs font-bold tracking-wider text-secondary uppercase mb-2">عن البرنامج</h2>
-            <p class="text-2xl font-bold text-primary">الاستثمار الأمثل في الاتصال الحكومي</p>
+            <span class="text-xs font-bold text-gold uppercase tracking-wider">التميز القيادي</span>
+            <h2 class="text-2xl font-bold text-navy mt-1">لماذا EX360؟</h2>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100/80 leading-relaxed">
-            <p class="text-gray-600 mb-4">
-                تأتي هذه الدورة لتسد فجوة حقيقية في كيفية تخطيط وتصميم الحملات التوعوية داخل القطاع العام. نحن لا نعلّم فقط الكتابة، بل نمنحك منهجية متكاملة لصناعة محتوى موثوق يتماشى مع السياسات الوطنية والتوجهات الاستراتيجية لكل جهة.
-            </p>
-            <div class="flex items-center gap-3 p-3 bg-primary/5 rounded-xl border-r-4 border-secondary">
-                <i data-lucide="sparkles" class="w-5 h-5 text-secondary shrink-0"></i>
-                <span class="text-sm font-semibold text-primary">محتوى تفاعلي، مبني على دراسات حالة واقعية ومجربة.</span>
+        <p class="text-gray-600 text-center text-sm leading-relaxed mb-6">
+            يقدم EX360 تجربة تطويرية فريدة تجمع بين الخبرات القيادية العالمية والتقنيات المستقبلية لتمكين الرؤساء التنفيذيين والقادة.
+        </p>
+
+        <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
+                <i data-lucide="cpu" class="w-6 h-6 text-gold mx-auto mb-2"></i>
+                <h3 class="text-xs font-bold text-navy">مختبر الذكاء الاصطناعي</h3>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
+                <i data-lucide="building-2" class="w-6 h-6 text-gold mx-auto mb-2"></i>
+                <h3 class="text-xs font-bold text-navy">محاكاة مجالس الإدارة</h3>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
+                <i data-lucide="wrench" class="w-6 h-6 text-gold mx-auto mb-2"></i>
+                <h3 class="text-xs font-bold text-navy">أدوات تنفيذية حية</h3>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
+                <i data-lucide="file-check" class="w-6 h-6 text-gold mx-auto mb-2"></i>
+                <h3 class="text-xs font-bold text-navy">خطة تطبيق عملي</h3>
             </div>
         </div>
     </section>
 
-    <!-- 3. WHY CHOOSE THIS COURSE (لماذا تختار هذه الدورة؟) -->
-    <section class="py-16 px-4 bg-primary text-white">
+    <!-- 3. EXECUTIVE CAPABILITIES (القدرات التنفيذية السبع) -->
+    <section class="py-16 px-4 bg-navy text-white">
         <div class="max-w-lg mx-auto">
             <div class="text-center mb-10 fade-in-up">
-                <h2 class="text-xs font-bold text-secondary uppercase mb-2">القيمة المضافة</h2>
-                <p class="text-2xl font-bold">لماذا هذه الدورة دون غيرها؟</p>
+                <span class="text-xs font-bold text-gold uppercase">المحاور الرئيسية</span>
+                <h2 class="text-2xl font-bold mt-1">القدرات التنفيذية السبع</h2>
+            </div>
+
+            <div class="space-y-3">
+                <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="w-8 h-8 rounded-lg bg-gold/10 text-gold font-extrabold flex items-center justify-center shrink-0 text-sm">01</div>
+                    <span class="text-sm font-semibold text-gray-200">الرؤية والتفكير الاستراتيجي التكيفي</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="w-8 h-8 rounded-lg bg-gold/10 text-gold font-extrabold flex items-center justify-center shrink-0 text-sm">02</div>
+                    <span class="text-sm font-semibold text-gray-200">صناعة القرار ورسم السياسات العُليا</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="w-8 h-8 rounded-lg bg-gold/10 text-gold font-extrabold flex items-center justify-center shrink-0 text-sm">03</div>
+                    <span class="text-sm font-semibold text-gray-200">قيادة التحول الرقمي والذكاء الاصطناعي</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="w-8 h-8 rounded-lg bg-gold/10 text-gold font-extrabold flex items-center justify-center shrink-0 text-sm">04</div>
+                    <span class="text-sm font-semibold text-gray-200">الإدارة المالية وحوكمة الشركات</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="w-8 h-8 rounded-lg bg-gold/10 text-gold font-extrabold flex items-center justify-center shrink-0 text-sm">05</div>
+                    <span class="text-sm font-semibold text-gray-200">التأثير والتواصل المؤسسي الفعّال</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="w-8 h-8 rounded-lg bg-gold/10 text-gold font-extrabold flex items-center justify-center shrink-0 text-sm">06</div>
+                    <span class="text-sm font-semibold text-gray-200">إدارة الأزمات والمخاطر الاستراتيجية</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10 fade-in-up">
+                    <div class="w-8 h-8 rounded-lg bg-gold/10 text-gold font-extrabold flex items-center justify-center shrink-0 text-sm">07</div>
+                    <span class="text-sm font-semibold text-gray-200">بناء القادة واستدامة الأداء</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PROGRAM METHODOLOGY (منهجية البرنامج) -->
+    <section class="py-16 px-4 max-w-lg mx-auto fade-in-up">
+        <div class="text-center mb-10">
+            <span class="text-xs font-bold text-gold uppercase">مسار التعلم</span>
+            <h2 class="text-2xl font-bold text-navy mt-1">منهجية البرنامج</h2>
+        </div>
+
+        <div class="relative border-r-2 border-gold/30 mr-4 space-y-6 pr-6">
+            <div class="relative">
+                <div class="absolute -right-[31px] top-1 w-4 h-4 rounded-full bg-gold"></div>
+                <h3 class="text-sm font-bold text-navy">Executive Insight</h3>
+                <p class="text-xs text-gray-500 mt-1">استبصار الرؤية القيادية وتحليل الواقع التنفيذي.</p>
+            </div>
+            <div class="relative">
+                <div class="absolute -right-[31px] top-1 w-4 h-4 rounded-full bg-gold"></div>
+                <h3 class="text-sm font-bold text-navy">Executive Icon & Lessons</h3>
+                <p class="text-xs text-gray-500 mt-1">استعراض تجارب ودروس أبرز القادة العالميّين.</p>
+            </div>
+            <div class="relative">
+                <div class="absolute -right-[31px] top-1 w-4 h-4 rounded-full bg-gold"></div>
+                <h3 class="text-sm font-bold text-navy">CEO Toolkit & AI Lab</h3>
+                <p class="text-xs text-gray-500 mt-1">تطبيق أدوات الرؤساء التنفيذيين ومختبر الذكاء الاصطناعي.</p>
+            </div>
+            <div class="relative">
+                <div class="absolute -right-[31px] top-1 w-4 h-4 rounded-full bg-gold"></div>
+                <h3 class="text-sm font-bold text-navy">Boardroom Simulation & Action Plan</h3>
+                <p class="text-xs text-gray-500 mt-1">محاكاة مجالس الإدارة وصياغة خطة التطبيق النهائية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. EXECUTIVE FIGURES (الشخصيات التنفيذية) -->
+    <section class="py-16 px-4 bg-softGray">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-10 fade-in-up">
+                <span class="text-xs font-bold text-gold uppercase">المقارنات المرجعية</span>
+                <h2 class="text-2xl font-bold text-navy mt-1">الشخصيات القيادية المعتمدة</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <div class="p-5 bg-white rounded-xl shadow-sm border border-gray-200/60 flex items-start gap-4 fade-in-up">
+                    <div class="p-3 bg-navy/5 rounded-xl shrink-0">
+                        <i data-lucide="user-check" class="w-6 h-6 text-navy"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-navy mb-1">نماذج الرؤساء التنفيذيين المبتكرين</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">دراسة استراتيجيات التحول والتكيف السريع للشركات الفائقة النمو.</p>
+                    </div>
+                </div>
+                <div class="p-5 bg-white rounded-xl shadow-sm border border-gray-200/60 flex items-start gap-4 fade-in-up">
+                    <div class="p-3 bg-navy/5 rounded-xl shrink-0">
+                        <i data-lucide="globe-2" class="w-6 h-6 text-navy"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-navy mb-1">قادة المؤسسات العالمية</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">استلهام طرق بناء الثقافة المؤسسية واستدامة التميز التنافسي.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. TARGET AUDIENCE (الفئة المستهدفة) -->
+    <section class="py-16 px-4 max-w-lg mx-auto">
+        <div class="text-center mb-10 fade-in-up">
+            <span class="text-xs font-bold text-gold uppercase">المشاركون</span>
+            <h2 class="text-2xl font-bold text-navy mt-1">من يستهدف البرنامج؟</h2>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+            <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center fade-in-up">
+                <i data-lucide="briefcase" class="w-6 h-6 text-gold mx-auto mb-2"></i>
+                <span class="text-xs font-bold text-navy block">الرؤساء التنفيذيون</span>
+            </div>
+            <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center fade-in-up">
+                <i data-lucide="users-round" class="w-6 h-6 text-gold mx-auto mb-2"></i>
+                <span class="text-xs font-bold text-navy block">أعضاء مجالس الإدارة</span>
+            </div>
+            <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center fade-in-up">
+                <i data-lucide="award" class="w-6 h-6 text-gold mx-auto mb-2"></i>
+                <span class="text-xs font-bold text-navy block">القيادات العليا</span>
+            </div>
+            <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center fade-in-up">
+                <i data-lucide="trending-up" class="w-6 h-6 text-gold mx-auto mb-2"></i>
+                <span class="text-xs font-bold text-navy block">ملاك الشركات وقادة التحول</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PROGRAM OUTCOMES (مخرجات البرنامج) -->
+    <section class="py-16 px-4 bg-navy text-white">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-10 fade-in-up">
+                <span class="text-xs font-bold text-gold uppercase">الأثر المتوقع</span>
+                <h2 class="text-2xl font-bold mt-1">مخرجات برنامج EX360</h2>
             </div>
 
             <div class="space-y-4">
-                <div class="flex gap-4 p-5 bg-white/5 rounded-xl border border-white/10 fade-in-up">
-                    <div class="p-3 bg-secondary/10 rounded-xl h-fit">
-                        <i data-lucide="shield-check" class="w-6 h-6 text-secondary"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-1">منهجية رسمية معتمدة</h3>
-                        <p class="text-sm text-gray-300 leading-relaxed">مصممة خصيصاً لتناسب الضوابط والسياسات الخاصة بالمنظمات الحكومية.</p>
-                    </div>
+                <div class="flex items-start gap-3 fade-in-up">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i>
+                    <p class="text-xs font-light text-gray-300 leading-relaxed">امتلك خطة عمل تنفيذية متكاملة مصممة خصيصاً لمؤسستك.</p>
                 </div>
-
-                <div class="flex gap-4 p-5 bg-white/5 rounded-xl border border-white/10 fade-in-up">
-                    <div class="p-3 bg-secondary/10 rounded-xl h-fit">
-                        <i data-lucide="target" class="w-6 h-6 text-secondary"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-1">تركيز على النتائج</h3>
-                        <p class="text-sm text-gray-300 leading-relaxed">تعلّم كيف تقيس أثر حملتك التوعوية وضمان وصولها للفئة المستهدفة بدقة.</p>
-                    </div>
+                <div class="flex items-start gap-3 fade-in-up">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i>
+                    <p class="text-xs font-light text-gray-300 leading-relaxed">إتقان استخدام أدوات الذكاء الاصطناعي في اتخاذ القرارات التنفيذية.</p>
                 </div>
-
-                <div class="flex gap-4 p-5 bg-white/5 rounded-xl border border-white/10 fade-in-up">
-                    <div class="p-3 bg-secondary/10 rounded-xl h-fit">
-                        <i data-lucide="layers" class="w-6 h-6 text-secondary"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white mb-1">تطبيق عملي فوري</h3>
-                        <p class="text-sm text-gray-300 leading-relaxed">ورش عمل حية تمكنك من صياغة استراتيجية توعوية متكاملة لجهتك خلال الدورة.</p>
-                    </div>
+                <div class="flex items-start gap-3 fade-in-up">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i>
+                    <p class="text-xs font-light text-gray-300 leading-relaxed">رفع كفاءة قيادة اجتماعات مجالس الإدارة وتوجيه الفرق العُليا.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. KEY FEATURES (أهم المميزات) -->
+    <!-- 8. ABOUT THE TRAINER (عن المدرب) -->
     <section class="py-16 px-4 max-w-lg mx-auto">
-        <div class="text-center mb-10 fade-in-up">
-            <h2 class="text-xs font-bold text-secondary uppercase mb-2">مميزات التجربة</h2>
-            <p class="text-2xl font-bold">ما ستحصل عليه أثناء التدريب</p>
+        <div class="text-center mb-8 fade-in-up">
+            <span class="text-xs font-bold text-gold uppercase">قيادة الدورة</span>
+            <h2 class="text-2xl font-bold text-navy mt-1">عن المدرب</h2>
         </div>
 
-        <div class="grid grid-cols-1 gap-4">
-            <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100 fade-in-up">
-                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
-                <span class="text-sm font-medium text-gray-700 leading-relaxed">أدوات ونماذج جاهزة للتطبيق المباشر في جهتك الحكومية.</span>
+        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center fade-in-up">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-gold p-1 shadow-md">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="م. عبدالله السلامة" class="w-full h-full object-cover rounded-full">
             </div>
-            <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100 fade-in-up">
-                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
-                <span class="text-sm font-medium text-gray-700 leading-relaxed">تحليل حي لأبرز الحملات التوعوية الناجحة محلياً وعالمياً.</span>
-            </div>
-            <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100 fade-in-up">
-                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
-                <span class="text-sm font-medium text-gray-700 leading-relaxed">بيئة تفاعلية لتبادل الخبرات مع صناع القرار في الاتصال المؤسسي.</span>
-            </div>
-            <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100 fade-in-up">
-                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
-                <span class="text-sm font-medium text-gray-700 leading-relaxed">توجيه مخصص ومباشر لتطوير أفكارك ومشروعاتك التوعوية.</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. SKILLS ACQUIRED (المهارات التي ستكتسبها) -->
-    <section class="py-16 px-4 bg-gray-100">
-        <div class="max-w-lg mx-auto">
-            <div class="text-center mb-10 fade-in-up">
-                <h2 class="text-xs font-bold text-secondary uppercase mb-2">التمكين المهني</h2>
-                <p class="text-2xl font-bold">مهارات تصنع فارقاً حقيقياً</p>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3">
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200/60 flex flex-col justify-between fade-in-up">
-                    <i data-lucide="book-open" class="w-6 h-6 text-secondary mb-3"></i>
-                    <span class="text-sm font-bold text-primary leading-tight">التخطيط الاستراتيجي للمحتوى</span>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200/60 flex flex-col justify-between fade-in-up">
-                    <i data-lucide="target" class="w-6 h-6 text-secondary mb-3"></i>
-                    <span class="text-sm font-bold text-primary leading-tight">هندسة الرسائل التوعوية</span>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200/60 flex flex-col justify-between fade-in-up">
-                    <i data-lucide="shield-check" class="w-6 h-6 text-secondary mb-3"></i>
-                    <span class="text-sm font-bold text-primary leading-tight">إدارة المخاطر الإعلامية</span>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200/60 flex flex-col justify-between fade-in-up">
-                    <i data-lucide="trending-up" class="w-6 h-6 text-secondary mb-3"></i>
-                    <span class="text-sm font-bold text-primary leading-tight">تحليل وقياس الأثر المجتمعي</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. WHO IS THIS FOR (لمن هذه الدورة؟) -->
-    <section class="py-16 px-4 max-w-lg mx-auto">
-        <div class="text-center mb-10 fade-in-up">
-            <h2 class="text-xs font-bold text-secondary uppercase mb-2">المستهدفون</h2>
-            <p class="text-2xl font-bold">الفئات الأكثر استفادة من البرنامج</p>
-        </div>
-
-        <div class="space-y-3">
-            <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 fade-in-up">
-                <div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
-                    <i data-lucide="users" class="w-5 h-5 text-primary"></i>
-                </div>
-                <span class="text-sm font-semibold text-gray-700">مدراء وموظفو إدارات الاتصال المؤسسي والإعلام.</span>
-            </div>
-            <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 fade-in-up">
-                <div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
-                    <i data-lucide="briefcase" class="w-5 h-5 text-primary"></i>
-                </div>
-                <span class="text-sm font-semibold text-gray-700">صناع المحتوى والمستشارون الإعلاميون في القطاع العام.</span>
-            </div>
-            <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 fade-in-up">
-                <div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
-                    <i data-lucide="award" class="w-5 h-5 text-primary"></i>
-                </div>
-                <span class="text-sm font-semibold text-gray-700">المشرفون على الحسابات والمنصات الرقمية الحكومية.</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. WHAT YOU WILL ACHIEVE (ماذا ستحقق بعد الدورة؟) -->
-    <section class="py-16 px-4 bg-primary text-white">
-        <div class="max-w-lg mx-auto">
-            <div class="text-center mb-10 fade-in-up">
-                <h2 class="text-xs font-bold text-secondary uppercase mb-2">رؤية مستقبلية</h2>
-                <p class="text-2xl font-bold">أثر مستدام يمتد لجهتك وعملك</p>
-            </div>
-
-            <div class="space-y-4">
-                <div class="flex items-start gap-3 fade-in-up">
-                    <div class="w-2 h-2 rounded-full bg-secondary mt-2 shrink-0"></div>
-                    <p class="text-sm font-light text-gray-300 leading-relaxed">القدرة على بناء حملات توعوية ذات كفاءة إنفاق عالية وأثر ملموس.</p>
-                </div>
-                <div class="flex items-start gap-3 fade-in-up">
-                    <div class="w-2 h-2 rounded-full bg-secondary mt-2 shrink-0"></div>
-                    <p class="text-sm font-light text-gray-300 leading-relaxed">الريادة في صياغة الرسائل التوعوية والحد من الشائعات أو الأخطاء الاتصالية.</p>
-                </div>
-                <div class="flex items-start gap-3 fade-in-up">
-                    <div class="w-2 h-2 rounded-full bg-secondary mt-2 shrink-0"></div>
-                    <p class="text-sm font-light text-gray-300 leading-relaxed">نقل المعرفة والمنهجية الحديثة لفريق عملك داخل الجهة الرسمية.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. CALL TO ACTION (التحفيز النهائي للاتصال) -->
-    <section class="py-20 px-4 text-center bg-white border-t border-gray-100">
-        <div class="max-w-xs mx-auto fade-in-up">
-            <h2 class="text-2xl font-extrabold text-primary mb-4">انطلق في مسار التميز الاتصالي</h2>
-            <p class="text-sm text-gray-500 mb-8 leading-relaxed">
-                استعد لقيادة دفة التوعية والتأثير في جهتك الحكومية بأحدث الأساليب والممارسات العلمية.
+            <h3 class="text-lg font-bold text-navy">م. عبدالله السلامة</h3>
+            <p class="text-xs text-gold font-semibold mb-3">مستشار القيادة والتحول التنفيذي</p>
+            <p class="text-xs text-gray-600 leading-relaxed">
+                خبرة طويلة في توجيه القيادات العليا وتطوير الاستراتيجيات المبتكرة للشركات الكبرى والجهات التنفيذية.
             </p>
-            <button onclick="alert('تم تسجيل اهتمامك بالبرنامج بنجاح!')" class="w-full inline-flex items-center justify-center py-4 px-6 rounded-xl text-lg font-bold text-white bg-primary hover:bg-[#152954] active:scale-[0.98] transition-all duration-200 shadow-xl shadow-primary/10">
-                ابدأ رحلتك المعرفية الآن
-            </button>
+        </div>
+    </section>
+
+    <!-- 9. CONTACT US (تواصل معنا) -->
+    <section class="py-16 px-4 bg-softGray text-navy border-t border-gray-200/60">
+        <div class="max-w-xs mx-auto text-center fade-in-up">
+            <h2 class="text-2xl font-extrabold text-navy mb-2">تواصل مع فريق EX360</h2>
+            <p class="text-xs text-gray-500 mb-6">نحن هنا لإجابة جميع استفساراتك حول المنظومة التنفيذية.</p>
+
+            <div class="space-y-3 mb-8 text-xs font-semibold text-gray-700">
+                <div class="flex items-center justify-center gap-2 p-3 bg-white rounded-xl shadow-sm">
+                    <i data-lucide="mail" class="w-4 h-4 text-gold"></i>
+                    <span>info@ex360.com</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 p-3 bg-white rounded-xl shadow-sm">
+                    <i data-lucide="phone" class="w-4 h-4 text-gold"></i>
+                    <span>+966 50 000 0000</span>
+                </div>
+            </div>
+
+            <div class="flex justify-center gap-4 text-navy">
+                <a href="#" class="p-3 bg-white rounded-full shadow-sm hover:text-gold transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                <a href="#" class="p-3 bg-white rounded-full shadow-sm hover:text-gold transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <a href="#" class="p-3 bg-white rounded-full shadow-sm hover:text-gold transition-colors"><i data-lucide="globe" class="w-5 h-5"></i></a>
+            </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-6 px-4 text-center text-xs text-gray-400 bg-gray-50 border-t border-gray-200/50">
-        <p>© 2026 صناعة المحتوى التوعوي للجهات الحكومية. جميع الحقوق محفوظة.</p>
+    <footer class="py-6 px-4 text-center text-xs text-gray-400 bg-navy text-white/60">
+        <p>© 2026 EX360 Executive Program. جميع الحقوق محفوظة.</p>
     </footer>
 
-    <!-- تشغيل مكتبة الأيقونات وتأثيرات التمرير الجمالية -->
+    <!-- Scripts -->
     <script>
-        // تفعيل الأيقونات
         lucide.createIcons();
 
-        // تفعيل تأثير التمرير للـ Elements (Intersection Observer)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
