@@ -14,17 +14,15 @@
 <meta property="og:site_name" content="EX360">
 <meta property="og:title" content="EX360 | برنامج تطوير الرؤساء التنفيذيين">
 <meta property="og:description" content="برنامج تنفيذي متقدم لتطوير الرؤساء التنفيذيين والقيادات العليا من خلال الخبرات العالمية، الذكاء الاصطناعي، ومحاكاة مجالس الإدارة.">
-
 <meta property="og:url" content="https://ex360.vercel.app/">
-<meta property="og:image" content="https://ex360.vercel.app/og-image.jpeg">
-
+<meta property="og:image" content="images/og-image.jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EX360 | برنامج تطوير الرؤساء التنفيذيين">
 <meta name="twitter:description" content="برنامج تنفيذي متقدم لتطوير الرؤساء التنفيذيين والقيادات العليا.">
-<meta name="twitter:image" content="https://ex360.vercel.app/og-image.jpeg">
+<meta name="twitter:image" content="images/og-image.jpeg">
 
 <style>
 
@@ -66,7 +64,7 @@
     min-height:100vh;
   }
 
-  /* decorative gold arc motif — echoes the poster's ring */
+  /* Decorative gold arc motif */
 
   .arc{
     position:absolute;
@@ -198,7 +196,7 @@
     color:var(--gold);
   }
 
-  /* SECTION shell */
+  /* SECTION */
 
   section{
     padding:38px 26px;
@@ -266,7 +264,7 @@
     line-height:1.5;
   }
 
-  /* CAPABILITIES LIST */
+  /* CAPABILITIES */
 
   .cap-list{
     display:flex;
@@ -440,10 +438,6 @@
     text-align:center;
   }
 
-  /*
-    SLIDER الخاص بصور التقييمات
-  */
-
   .trainer-slider{
     width:100%;
     height:240px;
@@ -505,7 +499,7 @@
     line-height:1.6;
   }
 
-  /* FOOTER / SOCIAL */
+  /* FOOTER */
 
   footer{
     background:var(--navy-deep);
@@ -586,8 +580,10 @@
 
   <div class="hero-img-wrap">
 
-    <!-- إذا عندك صورة الهيرو الحالية ضعها هنا -->
-    <img src="images/hero.jpg" alt="EX360 Executive Program">
+    <img
+      src="images/hero.jpg"
+      alt="EX360 Executive Program"
+    >
 
     <div class="hero-fade"></div>
 
@@ -995,33 +991,28 @@
 
     <div class="trainer-card">
 
-      <!--
-        صور التقييمات من المشاركين
-        تعرض الآراء الإيجابية من قادة معروفين
-      -->
-
       <div class="trainer-slider">
 
         <img
-          src="WhatsApp Image 2026-08-14 at 9.39.37 PM.jpeg"
+          src="images/review-1.jpeg"
           class="trainer-slide active"
           alt="تقييم من د. عبدالله العجلان"
         >
 
         <img
-          src="WhatsApp Image 2026-08-14 at 9.39.49 PM.jpeg"
+          src="images/review-2.jpeg"
           class="trainer-slide"
           alt="تقييم من موسى"
         >
 
         <img
-          src="WhatsApp Image 2026-08-14 at 9.39.55 PM.jpeg"
+          src="images/review-3.jpeg"
           class="trainer-slide"
           alt="تقييم من عبدالعزيز السلامة"
         >
 
         <img
-          src="WhatsApp Image 2026-08-14 at 9.44.41 PM.jpeg"
+          src="images/review-4.jpeg"
           class="trainer-slide"
           alt="تقييم من Nijr Alotaibi"
         >
@@ -1077,6 +1068,8 @@
 
     <div class="social-row">
 
+      <!-- X -->
+
       <a
         href="https://x.com/ex360sa"
         target="_blank"
@@ -1094,6 +1087,8 @@
 
       </a>
 
+
+      <!-- Instagram -->
 
       <a
         href="https://www.instagram.com/ex360sa/?hl=ar"
@@ -1113,6 +1108,8 @@
       </a>
 
 
+      <!-- TikTok -->
+
       <a
         href="https://www.tiktok.com/@ex360sa?_r=1&_t=ZS-98Of1elkCNG"
         target="_blank"
@@ -1130,6 +1127,8 @@
 
       </a>
 
+
+      <!-- LinkedIn -->
 
       <a
         href="https://www.linkedin.com/company/ex360sa"
@@ -1160,11 +1159,7 @@
 </div>
 
 
-<!--
-====================================================
-SLIDER JAVASCRIPT
-====================================================
--->
+<!-- SLIDER JAVASCRIPT -->
 
 <script>
 
@@ -1172,18 +1167,19 @@ SLIDER JAVASCRIPT
 
   let currentSlide = 0;
 
-  setInterval(() => {
+  if (slides.length > 1) {
 
-    /* إخفاء الصورة الحالية */
-    slides[currentSlide].classList.remove('active');
+    setInterval(() => {
 
-    /* الانتقال للصورة التالية */
-    currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.remove('active');
 
-    /* إظهار الصورة الجديدة */
-    slides[currentSlide].classList.add('active');
+      currentSlide = (currentSlide + 1) % slides.length;
 
-  }, 3000);
+      slides[currentSlide].classList.add('active');
+
+    }, 3000);
+
+  }
 
 </script>
 
