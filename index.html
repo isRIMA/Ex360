@@ -438,6 +438,12 @@
     text-align:center;
   }
 
+  /*
+    السلايدر الجديد:
+    الصور تتحرك أفقياً يمين ويسار
+    بدل تغيير opacity.
+  */
+
   .trainer-slider{
     width:100%;
     height:240px;
@@ -446,20 +452,58 @@
     border-radius:4px;
     margin:0 auto 20px;
     background:var(--navy);
+    direction:ltr;
+    touch-action:pan-y;
+    cursor:grab;
+  }
+
+  .trainer-slider.dragging{
+    cursor:grabbing;
+  }
+
+  .trainer-track{
+    display:flex;
+    height:100%;
+    width:100%;
+    transition:transform .65s cubic-bezier(.22,.61,.36,1);
+    will-change:transform;
   }
 
   .trainer-slide{
-    position:absolute;
-    inset:0;
     width:100%;
     height:100%;
+    flex:0 0 100%;
     object-fit:cover;
-    opacity:0;
-    transition:opacity 1s ease-in-out;
+    display:block;
+    user-select:none;
+    -webkit-user-drag:none;
+    pointer-events:none;
   }
 
-  .trainer-slide.active{
-    opacity:1;
+  .trainer-dots{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    margin-top:2px;
+    direction:rtl;
+  }
+
+  .trainer-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    border:0;
+    padding:0;
+    background:#D8D0BE;
+    cursor:pointer;
+    transition:.25s;
+  }
+
+  .trainer-dot.active{
+    width:20px;
+    border-radius:10px;
+    background:var(--gold);
   }
 
   .trainer-card h3{
@@ -991,31 +1035,72 @@
 
     <div class="trainer-card">
 
-      <div class="trainer-slider">
+      <!-- SLIDER -->
 
-        <img
-          src="images/review-1.jpeg"
-          class="trainer-slide active"
-          alt="تقييم من د. عبدالله العجلان"
-        >
+      <div class="trainer-slider" id="trainerSlider">
 
-        <img
-          src="images/review-2.jpeg"
-          class="trainer-slide"
-          alt="تقييم من موسى"
-        >
+        <div class="trainer-track" id="trainerTrack">
 
-        <img
-          src="images/review-3.jpeg"
-          class="trainer-slide"
-          alt="تقييم من عبدالعزيز السلامة"
-        >
+          <img
+            src="images/review-1.jpeg"
+            class="trainer-slide"
+            alt="تقييم من د. عبدالله العجلان"
+            draggable="false"
+          >
 
-        <img
-          src="images/review-4.jpeg"
-          class="trainer-slide"
-          alt="تقييم من Nijr Alotaibi"
-        >
+          <img
+            src="images/review-2.jpeg"
+            class="trainer-slide"
+            alt="تقييم من موسى"
+            draggable="false"
+          >
+
+          <img
+            src="images/review-3.jpeg"
+            class="trainer-slide"
+            alt="تقييم من عبدالعزيز السلامة"
+            draggable="false"
+          >
+
+          <img
+            src="images/review-4.jpeg"
+            class="trainer-slide"
+            alt="تقييم من Nijr Alotaibi"
+            draggable="false"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- SLIDER DOTS -->
+
+      <div class="trainer-dots" id="trainerDots">
+
+        <button
+          class="trainer-dot active"
+          type="button"
+          aria-label="الصورة الأولى"
+        ></button>
+
+        <button
+          class="trainer-dot"
+          type="button"
+          aria-label="الصورة الثانية"
+        ></button>
+
+        <button
+          class="trainer-dot"
+          type="button"
+          aria-label="الصورة الثالثة"
+        ></button>
+
+        <button
+          class="trainer-dot"
+          type="button"
+          aria-label="الصورة الرابعة"
+        ></button>
 
       </div>
 
@@ -1100,7 +1185,7 @@
         <svg viewBox="0 0 24 24">
 
           <path
-            d="M12 2c2.7 0 3.05.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.07.06 1.42.06 4.12s-.01 3.05-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.07.05-1.42.06-4.12.06s-3.05-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.05 2 14.7 2 12s.01-3.05.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45 2.53c.64-.25 1.37-.47 2.43-.47C8.95 2.01 9.3 2 12 2zm0 1.8c-2.65 0-2.97.01-4.02.06-.86.04-1.33.18-1.64.3-.41.16-.71.35-1.02.66-.31.31-.5.61-.66 1.02-.12.31-.26.78-.3 1.64C4.31 9.03 4.3 9.35 4.3 12s.01 2.97.06 4.02c.04.86.18 1.33.3 1.64.12.41.35.71.66 1.02.31.31.61.5 1.02.66.31.12.78.26 1.64.3 1.05.05 1.37.06 4.02.06s2.97-.01 4.02-.06c.86-.04 1.33-.18 1.64-.3.41-.16.71-.35 1.02-.66.31-.31.5-.61.66-1.02.12-.31.26-.78.3-1.64.05-1.05.06-1.37.06-4.02s-.01-2.97-.06-4.02c-.04-.86-.18-1.33-.3-1.64a2.7 2.7 0 0 0-.66-1.02 2.7 2.7 0 0 0-1.02-.66c-.31-.12-.78-.26-1.64-.3C14.97 3.81 14.65 3.8 12 3.8zm0 3.05a5.15 5.15 0 1 1 0 10.3 5.15 5.15 0 0 1 0-10.3zm0 1.8a3.35 3.35 0 1 0 0 6.7 3.35 3.35 0 0 0 0-6.7zm5.35-1.98a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"
+            d="M12 2c2.7 0 3.05.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.07.06 1.42.06 4.12s-.01 3.05-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.07.05-1.42.06-4.12.06s-3.05-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.05 2 14.7 2 12s.01-3.05.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45 2.53c.64-.25 1.37-.47 2.43-.47C8.95 2.01 9.3 2 12 2zm0 1.8c-2.65 0-2.97.01-4.02.06-.86.04-1.33.18-1.64.3-.41.16-.71.35-1.02.66-.31.31-.5.61-.66 1.02-.12.31-.26.78-.3 1.64C4.31 9.03 4.3 9.35 4.3 12s.01 2.97.06 4.02c.04.86.18 1.33.3 1.64.12.41.35.71.66 1.02.31.31.61.5 1.02.66.31.12.78.26 1.64.3 1.05.05 1.37.06 4.02.06s2.97-.01 4.02-.06c.86-.04 1.33-.18 1.64-.3.41-.12.71-.35 1.02-.66.31-.31.5-.61.66-1.02.12-.31.26-.78.3-1.64.05-1.05.06-1.37.06-4.02s-.01-2.97-.06-4.02c-.04-.86-.18-1.33-.3-1.64a2.7 2.7 0 0 0-.66-1.02 2.7 2.7 0 0 0-1.02-.66c-.31-.12-.78-.26-1.64-.3C14.97 3.81 14.65 3.8 12 3.8zm0 3.05a5.15 5.15 0 1 1 0 10.3 5.15 5.15 0 0 1 0-10.3zm0 1.8a3.35 3.35 0 1 0 0 6.7 3.35 3.35 0 0 0 0-6.7zm5.35-1.98a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"
           />
 
         </svg>
@@ -1159,27 +1244,324 @@
 </div>
 
 
-<!-- SLIDER JAVASCRIPT -->
+<!-- HORIZONTAL SLIDER JAVASCRIPT -->
 
 <script>
 
+  const slider = document.getElementById('trainerSlider');
+  const track = document.getElementById('trainerTrack');
   const slides = document.querySelectorAll('.trainer-slide');
+  const dots = document.querySelectorAll('.trainer-dot');
 
   let currentSlide = 0;
+  let autoSlide;
 
-  if (slides.length > 1) {
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
 
-    setInterval(() => {
+  /*
+    تحديث مكان السلايدر
+    الصور تتحرك أفقياً.
+  */
 
-      slides[currentSlide].classList.remove('active');
+  function updateSlider(animate = true){
 
-      currentSlide = (currentSlide + 1) % slides.length;
+    if(animate){
+      track.style.transition =
+        'transform .65s cubic-bezier(.22,.61,.36,1)';
+    }else{
+      track.style.transition = 'none';
+    }
 
-      slides[currentSlide].classList.add('active');
+    /*
+      لأن الصفحة RTL ولكن track مضبوط LTR،
+      نستخدم translateX بالسالب للانتقال بين الصور.
+    */
 
-    }, 3000);
+    track.style.transform =
+      `translateX(-${currentSlide * 100}%)`;
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle(
+        'active',
+        index === currentSlide
+      );
+    });
+  }
+
+
+  /*
+    الانتقال للصورة التالية
+  */
+
+  function nextSlide(){
+
+    currentSlide =
+      (currentSlide + 1) % slides.length;
+
+    updateSlider();
+  }
+
+
+  /*
+    الانتقال للصورة السابقة
+  */
+
+  function previousSlide(){
+
+    currentSlide =
+      (currentSlide - 1 + slides.length) %
+      slides.length;
+
+    updateSlider();
+  }
+
+
+  /*
+    التشغيل التلقائي
+  */
+
+  function startAutoSlide(){
+
+    stopAutoSlide();
+
+    autoSlide = setInterval(() => {
+
+      if(!isDragging){
+        nextSlide();
+      }
+
+    }, 3500);
 
   }
+
+
+  function stopAutoSlide(){
+
+    if(autoSlide){
+      clearInterval(autoSlide);
+      autoSlide = null;
+    }
+
+  }
+
+
+  /*
+    الضغط على النقاط
+  */
+
+  dots.forEach((dot, index) => {
+
+    dot.addEventListener('click', () => {
+
+      currentSlide = index;
+
+      updateSlider();
+
+      startAutoSlide();
+
+    });
+
+  });
+
+
+  /*
+    Touch / Swipe
+    السحب يمين ويسار بالجوال
+  */
+
+  slider.addEventListener(
+    'touchstart',
+    (event) => {
+
+      startX = event.touches[0].clientX;
+      currentX = startX;
+
+      isDragging = true;
+
+      stopAutoSlide();
+
+      slider.classList.add('dragging');
+
+      track.style.transition = 'none';
+
+    },
+    { passive:true }
+  );
+
+
+  slider.addEventListener(
+    'touchmove',
+    (event) => {
+
+      if(!isDragging) return;
+
+      currentX = event.touches[0].clientX;
+
+      const diff = currentX - startX;
+
+      const baseOffset =
+        -(currentSlide * slider.offsetWidth);
+
+      track.style.transform =
+        `translateX(${baseOffset + diff}px)`;
+
+    },
+    { passive:true }
+  );
+
+
+  slider.addEventListener(
+    'touchend',
+    () => {
+
+      if(!isDragging) return;
+
+      const diff = currentX - startX;
+
+      isDragging = false;
+
+      slider.classList.remove('dragging');
+
+      /*
+        إذا سحب المستخدم أكثر من 50px
+        ننتقل للصورة التالية أو السابقة.
+      */
+
+      if(Math.abs(diff) > 50){
+
+        if(diff < 0){
+
+          nextSlide();
+
+        }else{
+
+          previousSlide();
+
+        }
+
+      }else{
+
+        updateSlider();
+
+      }
+
+      startAutoSlide();
+
+    }
+  );
+
+
+  /*
+    Mouse drag للكمبيوتر
+  */
+
+  slider.addEventListener(
+    'mousedown',
+    (event) => {
+
+      startX = event.clientX;
+      currentX = startX;
+
+      isDragging = true;
+
+      stopAutoSlide();
+
+      slider.classList.add('dragging');
+
+      track.style.transition = 'none';
+
+    }
+  );
+
+
+  window.addEventListener(
+    'mousemove',
+    (event) => {
+
+      if(!isDragging) return;
+
+      currentX = event.clientX;
+
+      const diff = currentX - startX;
+
+      const baseOffset =
+        -(currentSlide * slider.offsetWidth);
+
+      track.style.transform =
+        `translateX(${baseOffset + diff}px)`;
+
+    }
+  );
+
+
+  window.addEventListener(
+    'mouseup',
+    () => {
+
+      if(!isDragging) return;
+
+      const diff = currentX - startX;
+
+      isDragging = false;
+
+      slider.classList.remove('dragging');
+
+      if(Math.abs(diff) > 50){
+
+        if(diff < 0){
+
+          nextSlide();
+
+        }else{
+
+          previousSlide();
+
+        }
+
+      }else{
+
+        updateSlider();
+
+      }
+
+      startAutoSlide();
+
+    }
+  );
+
+
+  /*
+    إيقاف الحركة التلقائية عندما يكون المؤشر فوق الصور
+  */
+
+  slider.addEventListener(
+    'mouseenter',
+    () => {
+      if(!isDragging){
+        stopAutoSlide();
+      }
+    }
+  );
+
+
+  slider.addEventListener(
+    'mouseleave',
+    () => {
+      if(!isDragging){
+        startAutoSlide();
+      }
+    }
+  );
+
+
+  /*
+    البداية
+  */
+
+  updateSlider(false);
+  startAutoSlide();
 
 </script>
 
