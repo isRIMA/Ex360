@@ -613,6 +613,434 @@
     opacity:.85;
   }
 
+  /* ============================================================
+     REGISTRATION — sticky bar, modal, form, bank card, dashboard bits
+     ============================================================ */
+
+  .reg-sticky{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:460px;
+    background:var(--cream-soft);
+    border-top:1px solid var(--line);
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    z-index:40;
+    box-shadow:0 -6px 18px rgba(17,28,51,.12);
+  }
+
+  .reg-sticky .seats-left{
+    font-family:'Cairo', sans-serif;
+    font-size:12px;
+    font-weight:700;
+    color:var(--navy);
+    line-height:1.5;
+  }
+
+  .reg-sticky .seats-left span{
+    color:var(--gold);
+  }
+
+  .btn-gold{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:var(--gold);
+    color:var(--navy-deep);
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:14px;
+    padding:13px 22px;
+    border-radius:2px;
+    border:1px solid var(--gold);
+    cursor:pointer;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:.2s;
+  }
+
+  .btn-gold:active{
+    opacity:.85;
+  }
+
+  .btn-gold:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+  }
+
+  .btn-outline{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:transparent;
+    color:var(--navy);
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:13.5px;
+    padding:12px 20px;
+    border-radius:2px;
+    border:1px solid var(--navy);
+    cursor:pointer;
+    text-decoration:none;
+  }
+
+  .hero-copy .btn-gold{
+    display:block;
+    width:100%;
+    margin-bottom:12px;
+  }
+
+  .final-cta .btn-gold{
+    display:inline-flex;
+  }
+
+  /* Modal shell */
+
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(17,28,51,.55);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:100;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s;
+  }
+
+  .modal-overlay.open{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .modal-sheet{
+    width:100%;
+    max-width:460px;
+    max-height:88vh;
+    overflow-y:auto;
+    background:var(--cream);
+    border-radius:14px 14px 0 0;
+    padding:22px 22px 30px;
+    transform:translateY(24px);
+    transition:transform .25s;
+    position:relative;
+  }
+
+  .modal-overlay.open .modal-sheet{
+    transform:translateY(0);
+  }
+
+  .modal-close{
+    position:absolute;
+    top:14px;
+    left:14px;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--cream-soft);
+    color:var(--navy);
+    font-size:16px;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .modal-sheet h2{
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:18px;
+    color:var(--navy);
+    margin-bottom:6px;
+    padding-left:30px;
+  }
+
+  .modal-sheet .modal-sub{
+    font-size:12.5px;
+    color:#6b6b64;
+    line-height:1.8;
+    margin-bottom:18px;
+  }
+
+  /* Form */
+
+  .field{
+    margin-bottom:14px;
+  }
+
+  .field label{
+    display:block;
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    color:var(--navy);
+    margin-bottom:6px;
+  }
+
+  .field label .req{
+    color:#B23A3A;
+  }
+
+  .field input,
+  .field select{
+    width:100%;
+    font-family:'Tajawal', sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    background:var(--cream-soft);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:12px 12px;
+    outline:none;
+  }
+
+  .field input:focus,
+  .field select:focus{
+    border-color:var(--gold);
+  }
+
+  .field .err{
+    display:none;
+    font-size:11.5px;
+    color:#B23A3A;
+    margin-top:5px;
+  }
+
+  .field.invalid input,
+  .field.invalid select{
+    border-color:#B23A3A;
+  }
+
+  .field.invalid .err{
+    display:block;
+  }
+
+  .form-alert{
+    display:none;
+    background:#FBEAEA;
+    border:1px solid #E3B4B4;
+    color:#8A2C2C;
+    font-size:12.5px;
+    padding:10px 12px;
+    border-radius:4px;
+    margin-bottom:14px;
+    line-height:1.7;
+  }
+
+  .form-alert.show{
+    display:block;
+  }
+
+  /* Result states */
+
+  .reg-result{
+    text-align:center;
+  }
+
+  .reg-result .status-badge{
+    display:inline-block;
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:12px;
+    padding:6px 14px;
+    border-radius:20px;
+    margin-bottom:14px;
+  }
+
+  .status-badge.confirmed{
+    background:#E7F1E6;
+    color:#2F6B2F;
+  }
+
+  .status-badge.waitlist{
+    background:#F2ECD9;
+    color:#8A6A1F;
+  }
+
+  .reg-result h3{
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:17px;
+    color:var(--navy);
+    margin-bottom:8px;
+    line-height:1.6;
+  }
+
+  .reg-result p.msg{
+    font-size:13.5px;
+    color:#4a4a45;
+    line-height:1.9;
+    margin-bottom:18px;
+  }
+
+  /* Bank transfer card */
+
+  .bank-card{
+    background:var(--navy);
+    color:var(--cream-soft);
+    border-radius:6px;
+    padding:20px 18px;
+    text-align:right;
+    margin-bottom:16px;
+  }
+
+  .bank-card h4{
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:14px;
+    color:var(--gold-soft);
+    margin-bottom:12px;
+  }
+
+  .bank-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid rgba(220,194,140,.2);
+    font-size:12.5px;
+  }
+
+  .bank-row:last-child{
+    border-bottom:none;
+  }
+
+  .bank-row .k{
+    color:#B9BFCC;
+    white-space:nowrap;
+  }
+
+  .bank-row .v{
+    color:var(--cream-soft);
+    font-weight:700;
+    direction:ltr;
+    text-align:left;
+    word-break:break-all;
+  }
+
+  .bank-amount{
+    text-align:center;
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px solid rgba(220,194,140,.25);
+  }
+
+  .bank-amount .num{
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:22px;
+    color:var(--gold);
+  }
+
+  .bank-amount .lbl{
+    font-size:11.5px;
+    color:#B9BFCC;
+    margin-top:2px;
+  }
+
+  /* Upload */
+
+  .upload-box{
+    border:1.5px dashed var(--line);
+    border-radius:6px;
+    padding:18px 14px;
+    text-align:center;
+    background:var(--cream-soft);
+    margin-bottom:14px;
+  }
+
+  .upload-box input[type=file]{
+    display:none;
+  }
+
+  .upload-box label{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    color:var(--navy);
+    cursor:pointer;
+    border:1px solid var(--navy);
+    padding:10px 18px;
+    border-radius:2px;
+  }
+
+  .upload-box .fname{
+    font-size:11.5px;
+    color:#6b6b64;
+    margin-top:10px;
+    word-break:break-all;
+  }
+
+  .upload-preview{
+    max-width:100%;
+    max-height:180px;
+    border-radius:4px;
+    margin-top:12px;
+    display:none;
+  }
+
+  .upload-done{
+    background:#E7F1E6;
+    color:#2F6B2F;
+    font-size:12.5px;
+    padding:12px;
+    border-radius:4px;
+    text-align:center;
+    line-height:1.8;
+  }
+
+  .spinner{
+    width:16px;
+    height:16px;
+    border:2px solid rgba(255,255,255,.4);
+    border-top-color:#fff;
+    border-radius:50%;
+    display:inline-block;
+    animation:spin .7s linear infinite;
+  }
+
+  @keyframes spin{
+    to{ transform:rotate(360deg); }
+  }
+
+  .status-pill{
+    position:fixed;
+    top:14px;
+    left:50%;
+    transform:translateX(-50%);
+    max-width:420px;
+    width:calc(100% - 32px);
+    background:var(--navy);
+    color:var(--cream-soft);
+    font-size:12.5px;
+    padding:10px 16px;
+    border-radius:6px;
+    z-index:60;
+    display:none;
+    text-align:center;
+    line-height:1.7;
+    cursor:pointer;
+  }
+
+  .status-pill.show{
+    display:block;
+  }
+
 </style>
 </head>
 
@@ -652,6 +1080,10 @@
       برنامج تنفيذي متقدم لبناء الرؤساء التنفيذيين من خلال التجارب العالمية،
       وأدوات القيادة، والذكاء الاصطناعي، ومحاكاة مجالس الإدارة.
     </p>
+
+    <button type="button" class="btn-gold" id="openRegisterHero">
+      سجل الآن
+    </button>
 
     <a class="cta" href="#why-ex360">
       استكشف أبعاد المنظومة
@@ -1133,6 +1565,10 @@
       ابدأ رحلتك نحو القيادة التنفيذية المتقدمة
     </h2>
 
+    <button type="button" class="btn-gold" id="openRegisterFinal">
+      سجل الآن
+    </button>
+
   </div>
 
 
@@ -1240,6 +1676,103 @@
     </div>
 
   </footer>
+
+
+  <!-- STATUS PILL (returning visitor) -->
+
+  <div class="status-pill" id="statusPill"></div>
+
+
+  <!-- REGISTRATION STICKY BAR -->
+
+  <div class="reg-sticky" id="regSticky">
+
+    <div class="seats-left" id="seatsLeftText">
+      باقي <span id="seatsLeftNum">14</span> من 14 مقعد
+    </div>
+
+    <button type="button" class="btn-gold" id="openRegisterSticky">
+      سجل الآن
+    </button>
+
+  </div>
+
+
+  <!-- REGISTRATION MODAL -->
+
+  <div class="modal-overlay" id="regOverlay">
+
+    <div class="modal-sheet" id="regSheet">
+
+      <button type="button" class="modal-close" id="closeRegister" aria-label="إغلاق">✕</button>
+
+      <!-- STEP 1: FORM -->
+
+      <div id="stepForm">
+
+        <h2>تسجيل الحضور</h2>
+
+        <p class="modal-sub">
+          يرجى تسجيل البيانات التالية، وسيتم التواصل معكم عند تحديد الموعد والتفاصيل.
+          التسجيل متاح لعدد محدود (14 مقعد) — الدورة في منطقة جدة.
+        </p>
+
+        <div class="form-alert" id="formAlert"></div>
+
+        <form id="regForm" novalidate>
+
+          <div class="field" data-field="full_name">
+            <label>الاسم الكامل <span class="req">*</span></label>
+            <input type="text" name="full_name" autocomplete="name">
+            <div class="err">يرجى إدخال الاسم الكامل</div>
+          </div>
+
+          <div class="field" data-field="job_title">
+            <label>المسمى الوظيفي الحالي <span class="req">*</span></label>
+            <input type="text" name="job_title">
+            <div class="err">يرجى إدخال المسمى الوظيفي</div>
+          </div>
+
+          <div class="field" data-field="company_name">
+            <label>اسم المنشأة <span class="req">*</span></label>
+            <input type="text" name="company_name">
+            <div class="err">يرجى إدخال اسم المنشأة</div>
+          </div>
+
+          <div class="field" data-field="sector">
+            <label>قطاع المنشأة <span class="req">*</span></label>
+            <input type="text" name="sector">
+            <div class="err">يرجى إدخال قطاع المنشأة</div>
+          </div>
+
+          <div class="field" data-field="phone">
+            <label>رقم الجوال <span class="req">*</span></label>
+            <input type="tel" name="phone" placeholder="05xxxxxxxx" autocomplete="tel">
+            <div class="err">يرجى إدخال رقم جوال صحيح</div>
+          </div>
+
+          <div class="field" data-field="email">
+            <label>البريد الإلكتروني <span class="req">*</span></label>
+            <input type="email" name="email" autocomplete="email">
+            <div class="err">يرجى إدخال بريد إلكتروني صحيح</div>
+          </div>
+
+          <button type="submit" class="btn-gold" id="submitRegBtn" style="width:100%;">
+            إرسال التسجيل
+          </button>
+
+        </form>
+
+      </div>
+
+      <!-- STEP 2: RESULT (confirmed / waitlist) -->
+
+      <div id="stepResult" class="reg-result" style="display:none;"></div>
+
+    </div>
+
+  </div>
+
 
 </div>
 
@@ -1562,6 +2095,417 @@
 
   updateSlider(false);
   startAutoSlide();
+
+</script>
+
+
+<!-- ============================================================
+     REGISTRATION LOGIC (Supabase backend)
+     ============================================================ -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  /* ------------------------------------------------------------
+     إعدادات Supabase — عدّلي هذين السطرين بعد إنشاء مشروعك
+     (Project Settings → API → Project URL / anon public key)
+     ------------------------------------------------------------ */
+
+  const SUPABASE_URL = 'https://YOUR-PROJECT-REF.supabase.co';
+  const SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
+
+  const CAPACITY = 14;
+  const REG_STORAGE_KEY = 'ex360_registration';
+
+  const isConfigured =
+    !SUPABASE_URL.includes('YOUR-PROJECT') &&
+    !SUPABASE_ANON_KEY.includes('YOUR-ANON');
+
+  const sb = isConfigured
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
+  /* عناصر DOM */
+
+  const overlay = document.getElementById('regOverlay');
+  const sheet = document.getElementById('regSheet');
+  const stepForm = document.getElementById('stepForm');
+  const stepResult = document.getElementById('stepResult');
+  const regForm = document.getElementById('regForm');
+  const formAlert = document.getElementById('formAlert');
+  const submitBtn = document.getElementById('submitRegBtn');
+  const seatsLeftNum = document.getElementById('seatsLeftNum');
+  const seatsLeftText = document.getElementById('seatsLeftText');
+  const statusPill = document.getElementById('statusPill');
+
+  function openModal(){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('closeRegister').addEventListener('click', closeModal);
+
+  overlay.addEventListener('click', (e) => {
+    if(e.target === overlay) closeModal();
+  });
+
+  function showAlert(msg){
+    formAlert.textContent = msg;
+    formAlert.classList.add('show');
+  }
+
+  function clearAlert(){
+    formAlert.textContent = '';
+    formAlert.classList.remove('show');
+  }
+
+  function setFieldError(name, hasError){
+    const field = regForm.querySelector(`[data-field="${name}"]`);
+    if(field) field.classList.toggle('invalid', hasError);
+  }
+
+  function validateForm(values){
+    let ok = true;
+
+    ['full_name','job_title','company_name','sector','phone','email'].forEach((k) => {
+      const empty = !values[k] || !values[k].trim();
+      setFieldError(k, empty);
+      if(empty) ok = false;
+    });
+
+    if(values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)){
+      setFieldError('email', true);
+      ok = false;
+    }
+
+    if(values.phone && !/^[0-9+\s-]{8,15}$/.test(values.phone)){
+      setFieldError('phone', true);
+      ok = false;
+    }
+
+    return ok;
+  }
+
+  /* ------------------------------------------------------------
+     المقاعد المتبقية (عرض عام بدون أي بيانات شخصية)
+     ------------------------------------------------------------ */
+
+  async function refreshSeatsLeft(){
+    if(!sb) return;
+
+    const { data, error } = await sb.rpc('get_public_stats');
+    if(error || !data || !data[0]) return;
+
+    const confirmedCount = data[0].confirmed_count;
+    const left = Math.max(CAPACITY - confirmedCount, 0);
+
+    if(left > 0){
+      seatsLeftNum.textContent = left;
+      seatsLeftText.innerHTML = `باقي <span id="seatsLeftNum">${left}</span> من ${CAPACITY} مقعد`;
+    }else{
+      seatsLeftText.textContent = 'اكتملت المقاعد — التسجيل الآن في قائمة الانتظار';
+    }
+  }
+
+  /* ------------------------------------------------------------
+     عرض نتيجة التسجيل (مؤكد / قائمة انتظار)
+     ------------------------------------------------------------ */
+
+  function renderResult(reg){
+    stepForm.style.display = 'none';
+    stepResult.style.display = 'block';
+    stepResult.innerHTML = '';
+
+    const confirmed = reg.status === 'confirmed';
+
+    const badge = document.createElement('div');
+    badge.className = 'status-badge ' + (confirmed ? 'confirmed' : 'waitlist');
+    badge.textContent = confirmed ? 'تم تأكيد مقعدك ✅' : 'أنت الآن في قائمة الانتظار';
+    stepResult.appendChild(badge);
+
+    const h3 = document.createElement('h3');
+    h3.textContent = confirmed
+      ? `مقعدك رقم ${reg.seat_number} من ${CAPACITY}`
+      : `ترتيبك في قائمة الانتظار: ${reg.waitlist_number}`;
+    stepResult.appendChild(h3);
+
+    const p = document.createElement('p');
+    p.className = 'msg';
+    p.textContent = confirmed
+      ? 'يرجى تحويل رسوم البرنامج إلى الحساب أدناه، ثم إرفاق صورة إثبات التحويل لإتمام تسجيلك.'
+      : 'شكراً لتسجيلك. المقاعد الـ14 مكتملة حالياً — سنتواصل معك فوراً في حال توفر مقعد.';
+    stepResult.appendChild(p);
+
+    if(confirmed){
+      stepResult.appendChild(buildBankCard());
+      stepResult.appendChild(buildUploadBox(reg));
+    }
+  }
+
+  function buildBankCard(){
+    const wrap = document.createElement('div');
+    wrap.className = 'bank-card';
+    wrap.innerHTML = `
+      <h4>بيانات التحويل البنكي</h4>
+      <div class="bank-row"><span class="k">البنك</span><span class="v">مصرف الإنماء — Alinma Bank</span></div>
+      <div class="bank-row"><span class="k">اسم الحساب</span><span class="v">مؤسسة اي اكس 360</span></div>
+      <div class="bank-row"><span class="k">رقم الحساب</span><span class="v">68207765930000</span></div>
+      <div class="bank-row"><span class="k">رقم الآيبان</span><span class="v">SA4905000068207765930000</span></div>
+      <div class="bank-amount">
+        <div class="num">2,950 ريال</div>
+        <div class="lbl">رسوم التسجيل المبكر</div>
+      </div>
+    `;
+    return wrap;
+  }
+
+  function buildUploadBox(reg){
+    const wrap = document.createElement('div');
+
+    if(reg.transfer_submitted_at){
+      wrap.innerHTML = `<div class="upload-done">✅ تم استلام إثبات التحويل بنجاح. سيتم التواصل معكم لتأكيد كافة التفاصيل.</div>`;
+      return wrap;
+    }
+
+    wrap.innerHTML = `
+      <div class="upload-box" id="uploadBox">
+        <input type="file" id="transferFile" accept="image/*">
+        <label for="transferFile">📎 إرفاق صورة التحويل</label>
+        <div class="fname" id="fileName"></div>
+        <img class="upload-preview" id="uploadPreview">
+      </div>
+      <button type="button" class="btn-gold" id="submitTransferBtn" style="width:100%;" disabled>
+        إرسال إثبات التحويل
+      </button>
+    `;
+
+    setTimeout(() => wireUpload(reg), 0);
+    return wrap;
+  }
+
+  function wireUpload(reg){
+    const fileInput = document.getElementById('transferFile');
+    const fileName = document.getElementById('fileName');
+    const preview = document.getElementById('uploadPreview');
+    const submitTransferBtn = document.getElementById('submitTransferBtn');
+    let compressedBlob = null;
+
+    fileInput.addEventListener('change', async () => {
+      const file = fileInput.files[0];
+      if(!file) return;
+
+      fileName.textContent = 'جاري تجهيز الصورة...';
+      submitTransferBtn.disabled = true;
+
+      try{
+        compressedBlob = await compressImage(file);
+        preview.src = URL.createObjectURL(compressedBlob);
+        preview.style.display = 'block';
+        fileName.textContent = file.name;
+        submitTransferBtn.disabled = false;
+      }catch(err){
+        fileName.textContent = 'تعذر قراءة الصورة، حاولي بصورة أخرى';
+      }
+    });
+
+    submitTransferBtn.addEventListener('click', async () => {
+      if(!compressedBlob) return;
+
+      submitTransferBtn.disabled = true;
+      submitTransferBtn.innerHTML = '<span class="spinner"></span>';
+
+      const path = `${reg.id}/${Date.now()}.jpg`;
+
+      const { error: upErr } = await sb.storage
+        .from('transfer-proofs')
+        .upload(path, compressedBlob, { contentType: 'image/jpeg' });
+
+      if(upErr){
+        submitTransferBtn.disabled = false;
+        submitTransferBtn.textContent = 'إرسال إثبات التحويل';
+        alert('حدث خطأ أثناء رفع الصورة، حاولي مرة أخرى.');
+        return;
+      }
+
+      const { data, error } = await sb.rpc('submit_transfer_proof', {
+        p_id: reg.id,
+        p_token: reg.token,
+        p_image_path: path
+      });
+
+      if(error || !data){
+        submitTransferBtn.disabled = false;
+        submitTransferBtn.textContent = 'إرسال إثبات التحويل';
+        alert('حدث خطأ أثناء حفظ البيانات، حاولي مرة أخرى.');
+        return;
+      }
+
+      reg.transfer_submitted_at = new Date().toISOString();
+      const wrap = document.getElementById('uploadBox').parentElement;
+      wrap.innerHTML = `<div class="upload-done">✅ تم استلام إثبات التحويل بنجاح. سيتم التواصل معكم لتأكيد كافة التفاصيل.</div>`;
+    });
+  }
+
+  function compressImage(file){
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        img.onload = () => {
+          const maxW = 1200;
+          const scale = Math.min(1, maxW / img.width);
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width * scale;
+          canvas.height = img.height * scale;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob((blob) => {
+            if(blob) resolve(blob); else reject(new Error('compress failed'));
+          }, 'image/jpeg', 0.72);
+        };
+        img.onerror = reject;
+        img.src = reader.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* ------------------------------------------------------------
+     تخزين/استرجاع تسجيل الزائر محلياً (نفس الجهاز والمتصفح)
+     ------------------------------------------------------------ */
+
+  function saveLocalReg(id, token){
+    localStorage.setItem(REG_STORAGE_KEY, JSON.stringify({ id, token }));
+  }
+
+  function getLocalReg(){
+    try{
+      const raw = localStorage.getItem(REG_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    }catch(e){
+      return null;
+    }
+  }
+
+  async function checkExistingRegistration(){
+    const local = getLocalReg();
+    if(!local || !sb) return null;
+
+    const { data, error } = await sb.rpc('get_registration_status', {
+      p_id: local.id,
+      p_token: local.token
+    });
+
+    if(error || !data || !data[0]) return null;
+
+    return Object.assign({ id: local.id, token: local.token }, data[0]);
+  }
+
+  async function openRegisterFlow(){
+    clearAlert();
+    stepForm.style.display = 'block';
+    stepResult.style.display = 'none';
+    regForm.reset();
+    regForm.querySelectorAll('.field').forEach((f) => f.classList.remove('invalid'));
+
+    if(!isConfigured){
+      showAlert('لم يتم ربط قاعدة البيانات بعد. تواصلي مع فريق التطوير لإكمال الإعداد.');
+      openModal();
+      return;
+    }
+
+    openModal();
+
+    const existing = await checkExistingRegistration();
+    if(existing){
+      renderResult(existing);
+    }
+  }
+
+  document.getElementById('openRegisterHero').addEventListener('click', openRegisterFlow);
+  document.getElementById('openRegisterSticky').addEventListener('click', openRegisterFlow);
+  document.getElementById('openRegisterFinal').addEventListener('click', openRegisterFlow);
+
+  statusPill.addEventListener('click', openRegisterFlow);
+
+  regForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearAlert();
+
+    if(!sb){
+      showAlert('لم يتم ربط قاعدة البيانات بعد.');
+      return;
+    }
+
+    const values = {
+      full_name: regForm.full_name.value,
+      job_title: regForm.job_title.value,
+      company_name: regForm.company_name.value,
+      sector: regForm.sector.value,
+      phone: regForm.phone.value,
+      email: regForm.email.value
+    };
+
+    if(!validateForm(values)){
+      showAlert('يرجى تعبئة جميع الحقول المطلوبة بشكل صحيح.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span>';
+
+    const { data, error } = await sb.rpc('submit_registration', {
+      p_full_name: values.full_name,
+      p_job_title: values.job_title,
+      p_company_name: values.company_name,
+      p_sector: values.sector,
+      p_phone: values.phone,
+      p_email: values.email
+    });
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'إرسال التسجيل';
+
+    if(error || !data || !data[0]){
+      showAlert('حدث خطأ أثناء إرسال التسجيل، يرجى المحاولة مرة أخرى.');
+      return;
+    }
+
+    const reg = data[0];
+    saveLocalReg(reg.id, reg.token);
+    renderResult(reg);
+    refreshSeatsLeft();
+  });
+
+  /* ------------------------------------------------------------
+     بداية الصفحة
+     ------------------------------------------------------------ */
+
+  (async function init(){
+    if(!isConfigured) return;
+
+    refreshSeatsLeft();
+
+    const existing = await checkExistingRegistration();
+    if(existing){
+      if(existing.status === 'confirmed'){
+        statusPill.textContent = existing.transfer_submitted_at
+          ? `✅ مقعدك مؤكد (رقم ${existing.seat_number}) — تم استلام إثبات التحويل`
+          : `مقعدك مؤكد (رقم ${existing.seat_number}) — يرجى إرفاق إثبات التحويل، اضغط هنا`;
+      }else{
+        statusPill.textContent = `أنت في قائمة الانتظار (ترتيب ${existing.waitlist_number}) — اضغط لعرض التفاصيل`;
+      }
+      statusPill.classList.add('show');
+    }
+  })();
 
 </script>
 
