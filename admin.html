@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم EX360</title>
+
+<style>
+
+  :root{
+    --cream:#F3EEE2;
+    --cream-soft:#FAF7F0;
+    --navy:#1B2A46;
+    --navy-deep:#111C33;
+    --gold:#C6A15B;
+    --gold-soft:#DCC28C;
+    --ink:#2B2B28;
+    --line:#E3DBC8;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  body{
+    background:var(--cream);
+    font-family:'Tajawal', Arial, sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+  }
+
+  /* ---------- LOGIN ---------- */
+
+  .login-wrap{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .login-card{
+    width:100%;
+    max-width:360px;
+    background:var(--cream-soft);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:32px 26px;
+  }
+
+  .login-card h1{
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:19px;
+    color:var(--navy);
+    margin-bottom:4px;
+    text-align:center;
+  }
+
+  .login-card .sub{
+    text-align:center;
+    font-size:12.5px;
+    color:#6b6b64;
+    margin-bottom:22px;
+  }
+
+  .field{ margin-bottom:14px; }
+
+  .field label{
+    display:block;
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    color:var(--navy);
+    margin-bottom:6px;
+  }
+
+  .field input{
+    width:100%;
+    font-size:14px;
+    color:var(--ink);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:11px 12px;
+    outline:none;
+  }
+
+  .field input:focus{ border-color:var(--gold); }
+
+  .btn-gold{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    width:100%;
+    background:var(--gold);
+    color:var(--navy-deep);
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:14px;
+    padding:13px;
+    border-radius:2px;
+    border:1px solid var(--gold);
+    cursor:pointer;
+  }
+
+  .btn-gold:disabled{ opacity:.5; cursor:not-allowed; }
+
+  .login-error{
+    display:none;
+    background:#FBEAEA;
+    border:1px solid #E3B4B4;
+    color:#8A2C2C;
+    font-size:12.5px;
+    padding:10px 12px;
+    border-radius:4px;
+    margin-bottom:14px;
+    text-align:center;
+  }
+
+  .login-error.show{ display:block; }
+
+  /* ---------- DASHBOARD ---------- */
+
+  .dash{ display:none; max-width:1100px; margin:0 auto; padding:26px 18px 60px; }
+
+  .dash-header{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    margin-bottom:22px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--line);
+  }
+
+  .dash-header h1{
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:20px;
+    color:var(--navy);
+  }
+
+  .dash-header .loc{
+    font-size:12.5px;
+    color:var(--gold);
+    font-weight:700;
+    margin-top:4px;
+  }
+
+  .logout-btn{
+    background:transparent;
+    border:1px solid var(--navy);
+    color:var(--navy);
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    padding:9px 16px;
+    border-radius:2px;
+    cursor:pointer;
+  }
+
+  .stats-row{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+    gap:12px;
+    margin-bottom:26px;
+  }
+
+  .stat-card{
+    background:var(--navy);
+    color:var(--cream-soft);
+    border-radius:6px;
+    padding:16px;
+    text-align:center;
+  }
+
+  .stat-card .num{
+    font-family:'Cairo', sans-serif;
+    font-weight:800;
+    font-size:24px;
+    color:var(--gold);
+  }
+
+  .stat-card .lbl{
+    font-size:11.5px;
+    color:#B9BFCC;
+    margin-top:4px;
+  }
+
+  .tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:16px;
+  }
+
+  .tab-btn{
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    padding:10px 18px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    background:var(--cream-soft);
+    color:var(--navy);
+    cursor:pointer;
+  }
+
+  .tab-btn.active{
+    background:var(--navy);
+    color:var(--cream-soft);
+    border-color:var(--navy);
+  }
+
+  .table-wrap{
+    overflow-x:auto;
+    background:var(--cream-soft);
+    border:1px solid var(--line);
+    border-radius:6px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+    min-width:900px;
+  }
+
+  th{
+    background:var(--navy);
+    color:var(--cream-soft);
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:12px;
+    padding:11px 10px;
+    text-align:right;
+    white-space:nowrap;
+  }
+
+  td{
+    padding:10px;
+    border-bottom:1px solid var(--line);
+    vertical-align:middle;
+  }
+
+  tr:last-child td{ border-bottom:none; }
+
+  .badge{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    padding:4px 10px;
+    border-radius:12px;
+  }
+
+  .badge.done{ background:#E7F1E6; color:#2F6B2F; }
+  .badge.pending{ background:#F2ECD9; color:#8A6A1F; }
+
+  .thumb-btn{
+    background:var(--gold);
+    color:var(--navy-deep);
+    border:none;
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:11.5px;
+    padding:6px 12px;
+    border-radius:3px;
+    cursor:pointer;
+  }
+
+  .thumb-btn:disabled{
+    background:var(--line);
+    color:#9a9488;
+    cursor:not-allowed;
+  }
+
+  .empty-note{
+    padding:30px;
+    text-align:center;
+    color:#6b6b64;
+    font-size:13px;
+  }
+
+  .loading-note{
+    padding:30px;
+    text-align:center;
+    color:#6b6b64;
+    font-size:13px;
+  }
+
+  /* image lightbox */
+
+  .lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(17,28,51,.85);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:200;
+  }
+
+  .lightbox.open{ display:flex; }
+
+  .lightbox img{
+    max-width:100%;
+    max-height:90vh;
+    border-radius:6px;
+  }
+
+  .lightbox-close{
+    position:absolute;
+    top:18px;
+    left:18px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:none;
+    background:var(--cream-soft);
+    color:var(--navy);
+    font-size:18px;
+    cursor:pointer;
+  }
+
+</style>
+</head>
+
+<body>
+
+  <!-- LOGIN -->
+
+  <div class="login-wrap" id="loginWrap">
+    <div class="login-card">
+      <h1>لوحة تحكم EX360</h1>
+      <div class="sub">تسجيل دخول الإدارة</div>
+
+      <div class="login-error" id="loginError"></div>
+
+      <form id="loginForm">
+        <div class="field">
+          <label>البريد الإلكتروني</label>
+          <input type="email" id="loginEmail" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label>كلمة المرور</label>
+          <input type="password" id="loginPassword" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn-gold" id="loginBtn">دخول</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+
+  <div class="dash" id="dash">
+
+    <div class="dash-header">
+      <div>
+        <h1>لوحة تحكم EX360</h1>
+        <div class="loc">برنامج تطوير الرؤساء التنفيذيين — الدورة: جدة</div>
+      </div>
+      <button class="logout-btn" id="logoutBtn">تسجيل الخروج</button>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="num" id="statConfirmed">—</div>
+        <div class="lbl">مسجلون مؤكَّدون (من 14)</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="statTransfers">—</div>
+        <div class="lbl">إثباتات تحويل مستلمة</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="statWaitlist">—</div>
+        <div class="lbl">في قائمة الانتظار</div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="confirmed">المسجلون (14 مقعد)</button>
+      <button class="tab-btn" data-tab="waitlist">قائمة الانتظار</button>
+    </div>
+
+    <div id="confirmedPane">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>الاسم الكامل</th>
+              <th>المسمى الوظيفي</th>
+              <th>المنشأة</th>
+              <th>القطاع</th>
+              <th>الجوال</th>
+              <th>البريد الإلكتروني</th>
+              <th>إثبات التحويل</th>
+              <th>تاريخ التسجيل</th>
+            </tr>
+          </thead>
+          <tbody id="confirmedBody"></tbody>
+        </table>
+        <div class="loading-note" id="confirmedLoading">جاري التحميل...</div>
+      </div>
+    </div>
+
+    <div id="waitlistPane" style="display:none;">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>الاسم الكامل</th>
+              <th>المسمى الوظيفي</th>
+              <th>المنشأة</th>
+              <th>القطاع</th>
+              <th>الجوال</th>
+              <th>البريد الإلكتروني</th>
+              <th>تاريخ التسجيل</th>
+            </tr>
+          </thead>
+          <tbody id="waitlistBody"></tbody>
+        </table>
+        <div class="loading-note" id="waitlistLoading">جاري التحميل...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LIGHTBOX -->
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <img id="lightboxImg">
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  /* عدّلي هذين السطرين لتطابقا نفس القيم المستخدمة في index.html */
+
+  const SUPABASE_URL = 'https://YOUR-PROJECT-REF.supabase.co';
+  const SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
+
+  const isConfigured =
+    !SUPABASE_URL.includes('YOUR-PROJECT') &&
+    !SUPABASE_ANON_KEY.includes('YOUR-ANON');
+
+  const sb = isConfigured
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
+  const loginWrap = document.getElementById('loginWrap');
+  const dash = document.getElementById('dash');
+  const loginForm = document.getElementById('loginForm');
+  const loginError = document.getElementById('loginError');
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+
+  function showLoginError(msg){
+    loginError.textContent = msg;
+    loginError.classList.add('show');
+  }
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    loginError.classList.remove('show');
+
+    if(!sb){
+      showLoginError('لم يتم ربط قاعدة البيانات بعد. راجعي إعدادات SUPABASE_URL و SUPABASE_ANON_KEY.');
+      return;
+    }
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = 'جاري الدخول...';
+
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'دخول';
+
+    if(error){
+      showLoginError('البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+      return;
+    }
+
+    showDashboard();
+  });
+
+  logoutBtn.addEventListener('click', async () => {
+    if(sb) await sb.auth.signOut();
+    dash.style.display = 'none';
+    loginWrap.style.display = 'flex';
+  });
+
+  async function showDashboard(){
+    loginWrap.style.display = 'none';
+    dash.style.display = 'block';
+    loadData();
+  }
+
+  /* التبويبات */
+
+  document.querySelectorAll('.tab-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.getElementById('confirmedPane').style.display = tab === 'confirmed' ? 'block' : 'none';
+      document.getElementById('waitlistPane').style.display = tab === 'waitlist' ? 'block' : 'none';
+    });
+  });
+
+  /* اللايت بوكس لعرض صورة التحويل */
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+
+  function openLightbox(url){
+    lightboxImg.src = url;
+    lightbox.classList.add('open');
+  }
+
+  document.getElementById('lightboxClose').addEventListener('click', () => {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox){
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+  });
+
+  function fmtDate(iso){
+    if(!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleString('ar-SA', { dateStyle:'medium', timeStyle:'short' });
+  }
+
+  async function loadData(){
+    const { data, error } = await sb
+      .from('registrations')
+      .select('*')
+      .order('created_at', { ascending: true });
+
+    document.getElementById('confirmedLoading').style.display = 'none';
+    document.getElementById('waitlistLoading').style.display = 'none';
+
+    if(error){
+      document.getElementById('confirmedBody').innerHTML =
+        `<tr><td colspan="9" class="empty-note">تعذر تحميل البيانات: ${error.message}</td></tr>`;
+      return;
+    }
+
+    const confirmed = (data || [])
+      .filter((r) => r.status === 'confirmed')
+      .sort((a,b) => (a.seat_number||0) - (b.seat_number||0));
+
+    const waitlist = (data || [])
+      .filter((r) => r.status === 'waitlist')
+      .sort((a,b) => (a.waitlist_number||0) - (b.waitlist_number||0));
+
+    document.getElementById('statConfirmed').textContent = confirmed.length + '/14';
+    document.getElementById('statTransfers').textContent =
+      confirmed.filter((r) => r.transfer_submitted_at).length;
+    document.getElementById('statWaitlist').textContent = waitlist.length;
+
+    renderConfirmed(confirmed);
+    renderWaitlist(waitlist);
+  }
+
+  function renderConfirmed(rows){
+    const body = document.getElementById('confirmedBody');
+
+    if(!rows.length){
+      body.innerHTML = `<tr><td colspan="9" class="empty-note">لا يوجد مسجلون بعد.</td></tr>`;
+      return;
+    }
+
+    body.innerHTML = rows.map((r) => {
+      const done = !!r.transfer_submitted_at;
+      return `
+        <tr>
+          <td>${r.seat_number ?? '—'}</td>
+          <td>${escapeHtml(r.full_name)}</td>
+          <td>${escapeHtml(r.job_title)}</td>
+          <td>${escapeHtml(r.company_name)}</td>
+          <td>${escapeHtml(r.sector)}</td>
+          <td dir="ltr" style="text-align:right;">${escapeHtml(r.phone)}</td>
+          <td dir="ltr" style="text-align:right;">${escapeHtml(r.email)}</td>
+          <td>
+            ${
+              done
+                ? `<span class="badge done">مرفوعة</span> <button class="thumb-btn" data-path="${r.transfer_image_path}">عرض</button>`
+                : `<span class="badge pending">لم تُرفع بعد</span>`
+            }
+          </td>
+          <td>${fmtDate(r.created_at)}</td>
+        </tr>
+      `;
+    }).join('');
+
+    body.querySelectorAll('.thumb-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const path = btn.dataset.path;
+        btn.disabled = true;
+        btn.textContent = '...';
+        const { data, error } = await sb.storage
+          .from('transfer-proofs')
+          .createSignedUrl(path, 3600);
+        btn.disabled = false;
+        btn.textContent = 'عرض';
+        if(error || !data){
+          alert('تعذر تحميل الصورة.');
+          return;
+        }
+        openLightbox(data.signedUrl);
+      });
+    });
+  }
+
+  function renderWaitlist(rows){
+    const body = document.getElementById('waitlistBody');
+
+    if(!rows.length){
+      body.innerHTML = `<tr><td colspan="8" class="empty-note">لا يوجد أحد في قائمة الانتظار حالياً.</td></tr>`;
+      return;
+    }
+
+    body.innerHTML = rows.map((r) => `
+      <tr>
+        <td>${r.waitlist_number ?? '—'}</td>
+        <td>${escapeHtml(r.full_name)}</td>
+        <td>${escapeHtml(r.job_title)}</td>
+        <td>${escapeHtml(r.company_name)}</td>
+        <td>${escapeHtml(r.sector)}</td>
+        <td dir="ltr" style="text-align:right;">${escapeHtml(r.phone)}</td>
+        <td dir="ltr" style="text-align:right;">${escapeHtml(r.email)}</td>
+        <td>${fmtDate(r.created_at)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function escapeHtml(str){
+    if(str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+
+  /* لو الجلسة محفوظة مسبقاً من المتصفح، ادخلي مباشرة */
+
+  (async function init(){
+    if(!sb) return;
+    const { data } = await sb.auth.getSession();
+    if(data && data.session){
+      showDashboard();
+    }
+  })();
+
+</script>
+
+</body>
+</html>
