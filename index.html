@@ -1655,7 +1655,7 @@
   <div class="reg-sticky" id="regSticky">
 
     <div class="seats-left" id="seatsLeftText">
-      سجلي الآن لحجز مقعدك في الدورة
+      سجل الآن لحجز مقعدك في الدورة
     </div>
 
     <button type="button" class="btn-gold" id="openRegisterSticky">
@@ -1681,7 +1681,7 @@
 
         <p class="modal-sub">
           يرجى تسجيل البيانات التالية، وسيتم التواصل معكم عند تحديد الموعد والتفاصيل.
-          التسجيل متاح لعدد محدود (14 مقعد) — الدورة في منطقة جدة.
+          التسجيل متاح لعدد محدود من المقاعد — الدورة في منطقة جدة.
         </p>
 
         <div class="form-alert" id="formAlert"></div>
@@ -2075,7 +2075,7 @@
 <script>
 
   /* ------------------------------------------------------------
-     إعدادات Supabase — عدّلي هذين السطرين بعد إنشاء مشروعك
+     إعدادات Supabase — عدّل هذين السطرين بعد إنشاء مشروعك
      (Project Settings → API → Project URL / anon public key)
      ------------------------------------------------------------ */
 
@@ -2197,7 +2197,7 @@
 
     const h3 = document.createElement('h3');
     h3.textContent = confirmed
-      ? `مقعدك رقم ${reg.seat_number} من ${CAPACITY}`
+      ? 'تم تأكيد تسجيلك في البرنامج'
       : `ترتيبك في قائمة الانتظار: ${reg.waitlist_number}`;
     stepResult.appendChild(h3);
 
@@ -2205,7 +2205,7 @@
     p.className = 'msg';
     p.textContent = confirmed
       ? 'يرجى تحويل رسوم البرنامج إلى الحساب أدناه، ثم إرفاق صورة إثبات التحويل لإتمام تسجيلك.'
-      : 'شكراً لتسجيلك. المقاعد الـ14 مكتملة حالياً — سنتواصل معك فوراً في حال توفر مقعد.';
+      : 'شكراً لتسجيلك. المقاعد مكتملة حالياً — سنتواصل معك فوراً في حال توفر مقعد.';
     stepResult.appendChild(p);
 
     if(confirmed){
