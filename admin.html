@@ -274,6 +274,42 @@
     cursor:not-allowed;
   }
 
+  .danger-btn{
+    background:#B23A3A;
+    color:#fff;
+    border:none;
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:11.5px;
+    padding:6px 12px;
+    border-radius:3px;
+    cursor:pointer;
+  }
+
+  .danger-btn:disabled{
+    background:var(--line);
+    color:#9a9488;
+    cursor:not-allowed;
+  }
+
+  .promote-btn{
+    background:var(--navy);
+    color:var(--cream-soft);
+    border:none;
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:11.5px;
+    padding:6px 12px;
+    border-radius:3px;
+    cursor:pointer;
+  }
+
+  .promote-btn:disabled{
+    background:var(--line);
+    color:#9a9488;
+    cursor:not-allowed;
+  }
+
   .empty-note{
     padding:30px;
     text-align:center;
@@ -397,6 +433,7 @@
               <th>البريد الإلكتروني</th>
               <th>إثبات التحويل</th>
               <th>تاريخ التسجيل</th>
+              <th>حذف</th>
             </tr>
           </thead>
           <tbody id="confirmedBody"></tbody>
@@ -418,6 +455,7 @@
               <th>الجوال</th>
               <th>البريد الإلكتروني</th>
               <th>تاريخ التسجيل</th>
+              <th>نقل لقائمة المسجلين</th>
             </tr>
           </thead>
           <tbody id="waitlistBody"></tbody>
@@ -580,7 +618,7 @@
     const body = document.getElementById('confirmedBody');
 
     if(!rows.length){
-      body.innerHTML = `<tr><td colspan="9" class="empty-note">لا يوجد مسجلون بعد.</td></tr>`;
+      body.innerHTML = `<tr><td colspan="10" class="empty-note">لا يوجد مسجلون بعد.</td></tr>`;
       return;
     }
 
@@ -603,6 +641,7 @@
             }
           </td>
           <td>${fmtDate(r.created_at)}</td>
+          <td><button class="danger-btn" data-id="${r.id}" data-name="${escapeHtml(r.full_name)}">حذف</button></td>
         </tr>
       `;
     }).join('');
@@ -624,15 +663,37 @@
         openLightbox(data.signedUrl);
       });
     });
+
+    body.querySelectorAll('.danger-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        const name = btn.dataset.name;
+        if(!confirm(`متأكدة إنك تبين تحذفين "${name}"؟ هذا الإجراء لا يمكن التراجع عنه، وسيتم تحرير مقعده.`)){
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = '...';
+        const { error } = await sb.rpc('admin_delete_registration', { p_id: id });
+        if(error){
+          btn.disabled = false;
+          btn.textContent = 'حذف';
+          alert('تعذر حذف التسجيل: ' + error.message);
+          return;
+        }
+        loadData();
+      });
+    });
   }
 
   function renderWaitlist(rows){
     const body = document.getElementById('waitlistBody');
 
     if(!rows.length){
-      body.innerHTML = `<tr><td colspan="8" class="empty-note">لا يوجد أحد في قائمة الانتظار حالياً.</td></tr>`;
+      body.innerHTML = `<tr><td colspan="9" class="empty-note">لا يوجد أحد في قائمة الانتظار حالياً.</td></tr>`;
       return;
     }
+
+    const seatsFull = (Number((document.getElementById('statConfirmed').textContent || '0/14').split('/')[0]) || 0) >= 14;
 
     body.innerHTML = rows.map((r) => `
       <tr>
@@ -644,8 +705,33 @@
         <td dir="ltr" style="text-align:right;">${escapeHtml(r.phone)}</td>
         <td dir="ltr" style="text-align:right;">${escapeHtml(r.email)}</td>
         <td>${fmtDate(r.created_at)}</td>
+        <td>
+          <button class="promote-btn" data-id="${r.id}" data-name="${escapeHtml(r.full_name)}" ${seatsFull ? 'disabled title="لا يوجد مقعد شاغر حالياً، احذفي أحد المسجلين أولاً"' : ''}>
+            نقل للمسجلين
+          </button>
+        </td>
       </tr>
     `).join('');
+
+    body.querySelectorAll('.promote-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        const name = btn.dataset.name;
+        if(!confirm(`متأكدة إنك تبين تنقلين "${name}" من قائمة الانتظار إلى المسجلين المؤكَّدين؟`)){
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = '...';
+        const { error } = await sb.rpc('admin_promote_from_waitlist', { p_id: id });
+        if(error){
+          btn.disabled = false;
+          btn.textContent = 'نقل للمسجلين';
+          alert('تعذر نقل التسجيل: ' + error.message);
+          return;
+        }
+        loadData();
+      });
+    });
   }
 
   function escapeHtml(str){
