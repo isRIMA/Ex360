@@ -1018,29 +1018,6 @@
     to{ transform:rotate(360deg); }
   }
 
-  .status-pill{
-    position:fixed;
-    top:14px;
-    left:50%;
-    transform:translateX(-50%);
-    max-width:420px;
-    width:calc(100% - 32px);
-    background:var(--navy);
-    color:var(--cream-soft);
-    font-size:12.5px;
-    padding:10px 16px;
-    border-radius:6px;
-    z-index:60;
-    display:none;
-    text-align:center;
-    line-height:1.7;
-    cursor:pointer;
-  }
-
-  .status-pill.show{
-    display:block;
-  }
-
 </style>
 </head>
 
@@ -1080,15 +1057,6 @@
       برنامج تنفيذي متقدم لبناء الرؤساء التنفيذيين من خلال التجارب العالمية،
       وأدوات القيادة، والذكاء الاصطناعي، ومحاكاة مجالس الإدارة.
     </p>
-
-    <button type="button" class="btn-gold" id="openRegisterHero">
-      سجل الآن
-    </button>
-
-    <a class="cta" href="#why-ex360">
-      استكشف أبعاد المنظومة
-      <span class="arrow">←</span>
-    </a>
 
   </div>
 
@@ -1680,7 +1648,6 @@
 
   <!-- STATUS PILL (returning visitor) -->
 
-  <div class="status-pill" id="statusPill"></div>
 
 
   <!-- REGISTRATION STICKY BAR -->
@@ -1688,7 +1655,7 @@
   <div class="reg-sticky" id="regSticky">
 
     <div class="seats-left" id="seatsLeftText">
-      باقي <span id="seatsLeftNum">14</span> من 14 مقعد
+      سجلي الآن لحجز مقعدك في الدورة
     </div>
 
     <button type="button" class="btn-gold" id="openRegisterSticky">
@@ -2123,7 +2090,9 @@
     !SUPABASE_ANON_KEY.includes('YOUR-ANON');
 
   const sb = isConfigured
-    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        global: { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } }
+      })
     : null;
 
   /* عناصر DOM */
@@ -2135,9 +2104,7 @@
   const regForm = document.getElementById('regForm');
   const formAlert = document.getElementById('formAlert');
   const submitBtn = document.getElementById('submitRegBtn');
-  const seatsLeftNum = document.getElementById('seatsLeftNum');
   const seatsLeftText = document.getElementById('seatsLeftText');
-  const statusPill = document.getElementById('statusPill');
 
   function openModal(){
     overlay.classList.add('open');
@@ -2206,8 +2173,7 @@
     const left = Math.max(CAPACITY - confirmedCount, 0);
 
     if(left > 0){
-      seatsLeftNum.textContent = left;
-      seatsLeftText.innerHTML = `باقي <span id="seatsLeftNum">${left}</span> من ${CAPACITY} مقعد`;
+      seatsLeftText.textContent = 'سجل الآن لحجز مقعدك ';
     }else{
       seatsLeftText.textContent = 'اكتملت المقاعد — التسجيل الآن في قائمة الانتظار';
     }
@@ -2310,7 +2276,7 @@
         fileName.textContent = file.name;
         submitTransferBtn.disabled = false;
       }catch(err){
-        fileName.textContent = 'تعذر قراءة الصورة، حاولي بصورة أخرى';
+        fileName.textContent = 'تعذر قراءة الصورة، حاول بصورة أخرى';
       }
     });
 
@@ -2329,7 +2295,7 @@
       if(upErr){
         submitTransferBtn.disabled = false;
         submitTransferBtn.textContent = 'إرسال إثبات التحويل';
-        alert('حدث خطأ أثناء رفع الصورة، حاولي مرة أخرى.');
+        alert('حدث خطأ أثناء رفع الصورة، حاول مرة أخرى.');
         return;
       }
 
@@ -2342,7 +2308,7 @@
       if(error || !data){
         submitTransferBtn.disabled = false;
         submitTransferBtn.textContent = 'إرسال إثبات التحويل';
-        alert('حدث خطأ أثناء حفظ البيانات، حاولي مرة أخرى.');
+        alert('حدث خطأ أثناء حفظ البيانات، حاول مرة أخرى.');
         return;
       }
 
@@ -2417,7 +2383,7 @@
     regForm.querySelectorAll('.field').forEach((f) => f.classList.remove('invalid'));
 
     if(!isConfigured){
-      showAlert('لم يتم ربط قاعدة البيانات بعد. تواصلي مع فريق التطوير لإكمال الإعداد.');
+      showAlert('لم يتم ربط قاعدة البيانات بعد. تواصل مع فريق التطوير لإكمال الإعداد.');
       openModal();
       return;
     }
@@ -2430,11 +2396,9 @@
     }
   }
 
-  document.getElementById('openRegisterHero').addEventListener('click', openRegisterFlow);
   document.getElementById('openRegisterSticky').addEventListener('click', openRegisterFlow);
   document.getElementById('openRegisterFinal').addEventListener('click', openRegisterFlow);
 
-  statusPill.addEventListener('click', openRegisterFlow);
 
   regForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -2491,20 +2455,7 @@
 
   (async function init(){
     if(!isConfigured) return;
-
     refreshSeatsLeft();
-
-    const existing = await checkExistingRegistration();
-    if(existing){
-      if(existing.status === 'confirmed'){
-        statusPill.textContent = existing.transfer_submitted_at
-          ? `✅ مقعدك مؤكد (رقم ${existing.seat_number}) — تم استلام إثبات التحويل`
-          : `مقعدك مؤكد (رقم ${existing.seat_number}) — يرجى إرفاق إثبات التحويل، اضغط هنا`;
-      }else{
-        statusPill.textContent = `أنت في قائمة الانتظار (ترتيب ${existing.waitlist_number}) — اضغط لعرض التفاصيل`;
-      }
-      statusPill.classList.add('show');
-    }
   })();
 
 </script>
